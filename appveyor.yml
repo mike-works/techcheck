@@ -14,5 +14,7 @@ version: 1.0.{build}
 environment:
   DEBUG_SHELL: true
 
+image: Script
+
 test_script:
   - npm run test:ci
