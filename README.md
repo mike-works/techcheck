@@ -6,7 +6,7 @@
 
 <p align='center'>
   <a href="https://travis-ci.org/mike-works/techcheck" title="Build Status">
-    <img title="Build Status" src="https://travis-ci.org/mike-works/techcheck.svg?branch=solutions"/>
+    <img title="Build Status" src="https://travis-ci.org/mike-works/techcheck.svg"/>
   </a>
   <a href="https://ci.appveyor.com/project/mike-north/techcheck" title="Build Status">
     <img title="Build Status" src="https://ci.appveyor.com/api/projects/status/13gtmp1ha2dvjfyp?svg=true"/>
