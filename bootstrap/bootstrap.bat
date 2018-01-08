@@ -4,7 +4,7 @@
  
 @ECHO OFF
 setlocal enabledelayedexpansion
-::SET DEBUG_SHELL=true
+SET DEBUG_SHELL=true
 IF NOT DEFINED TECHCHECK_NODE_CMD (
    SET TECHCHECK_NODE_CMD="node"
 )
