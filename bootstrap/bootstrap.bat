@@ -3,10 +3,17 @@
 :: # (c) 2018 Mike Works, Inc.
  
 @ECHO OFF
+setlocal enabledelayedexpansion
+SET DEBUG_SHELL=true
+IF NOT DEFINED TECHCHECK_NODE_CMD (
+   SET TECHCHECK_NODE_CMD="git"
+)
+IF NOT DEFINED TECHCHECK_NODE_VERSION_ARG (
+   SET TECHCHECK_NODE_VERSION_ARG=--version
+)
 
-ECHO ------------------------------------------------------------
-ECHO Starting setup checks. This may take a moment...
 CALL :assert_node_version
+Goto :EOF
 
 :log
 IF DEFINED DEBUG_SHELL ( ECHO %* )
@@ -18,32 +25,35 @@ ECHO                Go to https://nodejs.org and follow installation instruction
 EXIT /B 1 :: error  
 
 :node_version_notfound
-ECHO [techcheck]  ERROR: Node.js version could not be determined!
-ECHO                Ensure you can run "node --version" and get a reasonable result (like "v4.5.6")
+ECHO [techcheck]  ERROR: Node.js version could not be detected
+ECHO                Node.js Path --> %1
+ECHO                Ensure you can run '%1 --version' and get a reasonable result (i.e., 'v1.2.3')
+ECHO                If this problem persists, please uninstall and reinstall node.js
+ECHO                Go to https://nodejs.org and follow installation instructions
 EXIT /B 1 :: error  
 
 
 :assert_node_version
 :: Get the node path
-FOR /F "tokens=* USEBACKQ" %%F IN (`where node`) DO (
+FOR /F "tokens=* USEBACKQ" %%F IN (`where "%TECHCHECK_NODE_CMD%"`) DO (
     SET NODE_PATH=%%F
 )
-:: If the node path is not defined
-IF NOT DEFINED NODE_PATH GOTO :node_path_notfound
-:: OR if the node path, when stringified, evaluates to an empty string
-IF "%NODE_PATH%"=="" GOTO :node_path_notfound :: invoke the node_path_notfound function
 
-call :log "[node_version] ℹ️ Node path found: %NODE_PATH%"
-FOR /F "tokens=* USEBACKQ" %%F IN (`"%NODE_PATH%" --version`) DO (
+IF NOT DEFINED NODE_PATH GOTO :node_path_notfound
+IF "%NODE_PATH%"=="" GOTO :node_path_notfound
+
+call :log [techcheck] Node path found: %NODE_PATH%
+FOR /F "tokens=* USEBACKQ" %%F IN (`"%NODE_PATH%" %TECHCHECK_NODE_VERSION_ARG%`) DO (
     SET NODE_VERSION=%%F
 )
-:: If the node version is not defined
-IF NOT DEFINED NODE_VERSION GOTO :node_version_notfound
-:: OR if the node path, when stringified, evaluates to an empty string
-IF "%NODE_VERSION%"=="" GOTO :node_version_notfound :: invoke the node_path_notfound function
 
+IF NOT DEFINED NODE_VERSION ( CALL :node_version_notfound "%NODE_PATH%" )
+IF "%NODE_VERSION%"=="" ( CALL :node_version_notfound "%NODE_PATH%" )
 
-call :log "[node_version] ℹ️ Node %NODE_VERSION% found at %NODE_PATH"
+call :log [techcheck] Node %NODE_VERSION% found at %NODE_PATH%
+ECHO [techcheck] Downloading main techcheck scripts
 powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/mike-works/workshops/master/packages/techcheck/dist/index.js?v=%RANDOM%%RANDOM%', 'techcheck.js')"
+ECHO [techcheck] Download complete. Running main techcheck scripts...
 "%NODE_PATH%" techcheck.js
+DEL techcheck.js
 EXIT /B 0
