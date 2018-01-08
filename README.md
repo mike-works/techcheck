@@ -8,6 +8,10 @@
   <a href="https://travis-ci.org/mike-works/workshops" title="Build Status">
     <img title="Build Status" src="https://travis-ci.org/mike-works/workshops.svg?branch=solutions"/>
   </a>
+  <a href="https://ci.appveyor.com/project/mike-north/techcheck" title="Build Status">
+    <img title="Build Status" src="https://ci.appveyor.com/api/projects/status/13gtmp1ha2dvjfyp?svg=true"/>
+  </a>
+
   <a title='GreenKeeper'>
     <img title='GreenKeeper' src='https://badges.greenkeeper.io/mike-works/workshops.svg'>
   </a>
