@@ -5,15 +5,15 @@
 </p>
 
 <p align='center'>
-  <a href="https://travis-ci.org/mike-works/workshops" title="Build Status">
-    <img title="Build Status" src="https://travis-ci.org/mike-works/workshops.svg?branch=solutions"/>
+  <a href="https://travis-ci.org/mike-works/techcheck" title="Build Status">
+    <img title="Build Status" src="https://travis-ci.org/mike-works/techcheck.svg?branch=solutions"/>
   </a>
   <a href="https://ci.appveyor.com/project/mike-north/techcheck" title="Build Status">
     <img title="Build Status" src="https://ci.appveyor.com/api/projects/status/13gtmp1ha2dvjfyp?svg=true"/>
   </a>
 
   <a title='GreenKeeper'>
-    <img title='GreenKeeper' src='https://badges.greenkeeper.io/mike-works/workshops.svg'>
+    <img title='GreenKeeper' src='https://badges.greenkeeper.io/mike-works/techcheck.svg'>
   </a>
 </p>
 
@@ -28,13 +28,13 @@ Most of techcheck requires [Node.js](https://nodejs.org/en/) to run, but to ensu
 ##### Linux, OS X, Windows 10 w/ Linux Subsystem
 
 ```sh
-curl -o- https://raw.githubusercontent.com/mike-works/workshops/master/packages/techcheck/shell/check-node.sh | bash
+curl -o- https://raw.githubusercontent.com/mike-works/techcheck/master/packages/techcheck/shell/check-node.sh | bash
 ```
 
 If you want, you can see some details describing what's going on by setting the `DEBUG_SHELL` environment variable as the script is run
 
 ```sh
-curl -o- https://raw.githubusercontent.com/mike-works/workshops/master/packages/techcheck/shell/check-node.sh | DEBUG_SHELL=true bash
+curl -o- https://raw.githubusercontent.com/mike-works/techcheck/master/packages/techcheck/shell/check-node.sh | DEBUG_SHELL=true bash
 ```
 
 &copy; 2018 [Mike.Works](https://mike.works), All Rights Reserved
