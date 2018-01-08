@@ -1,5 +1,6 @@
-@ECHO OFF
+
 ECHO "Testing windows bootstrap scripts"
+which node
 call test/windows.bat
 IF "%ERRORLEVEL%"=="1" (
     ECHO "Errors detected in bootstrap scripts"
