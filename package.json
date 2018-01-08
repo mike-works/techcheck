@@ -6,11 +6,12 @@
   "scripts": {
     "build": "scripty",
     "build:ts": "scripty",
-    "tslint": "scripty",
+    "lint:ts": "tslint -p tsconfig.json",
     "watch": "scripty",
     "watch:ts": "scripty",
     "watch:node": "scripty",
     "test": "scripty",
+    "test:ci": "scripty",
     "test:watch": "scripty"
   },
   "bin": {
