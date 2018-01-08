@@ -3,8 +3,8 @@
 :: # (c) 2018 Mike Works, Inc.
  
 @ECHO OFF
-setlocal enabledelayedexpansion
 SET DEBUG_SHELL=true
+setlocal enabledelayedexpansion
 IF NOT DEFINED TECHCHECK_NODE_CMD (
    SET TECHCHECK_NODE_CMD="node"
 )
