@@ -13,3 +13,5 @@
 
 # Ignore built ts files
 # **/dist/**/*
+
+tmp

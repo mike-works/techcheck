@@ -4,12 +4,15 @@
  
 @ECHO OFF
 setlocal enabledelayedexpansion
-SET DEBUG_SHELL=true
+::SET DEBUG_SHELL=true
 IF NOT DEFINED TECHCHECK_NODE_CMD (
-   SET TECHCHECK_NODE_CMD="git"
+   SET TECHCHECK_NODE_CMD="node"
 )
 IF NOT DEFINED TECHCHECK_NODE_VERSION_ARG (
    SET TECHCHECK_NODE_VERSION_ARG=--version
+)
+IF NOT DEFINED TECHCHECK_TMP_FOLDER (
+   SET TECHCHECK_TMP_FOLDER=tmp
 )
 
 CALL :assert_node_version
@@ -52,8 +55,7 @@ IF "%NODE_VERSION%"=="" ( CALL :node_version_notfound "%NODE_PATH%" )
 
 call :log [techcheck] Node %NODE_VERSION% found at %NODE_PATH%
 ECHO [techcheck] Downloading main techcheck scripts
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/mike-works/workshops/master/packages/techcheck/dist/index.js?v=%RANDOM%%RANDOM%', 'techcheck.js')"
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/mike-works/workshops/master/packages/techcheck/dist/index.js?v=%RANDOM%%RANDOM%', '%TECHCHECK_TMP_FOLDER%/index.js')"
 ECHO [techcheck] Download complete. Running main techcheck scripts...
-"%NODE_PATH%" techcheck.js
-DEL techcheck.js
+"%NODE_PATH%" %TECHCHECK_TMP_FOLDER%/index.js
 EXIT /B 0
