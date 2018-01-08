@@ -3,6 +3,6 @@
     setTimeout(() => {
       process.stdout.write('Checking some other things');
       res();
-    }, 2000);
+    }, '2000');
   });
 })();

@@ -34,10 +34,13 @@ call :assert_in_output tmp\test_output_normal.txt "node_on_system_normal" "compl
 ::    set MESSAGE=Could not find string in command output
 ::    goto :fail
 ::)
-IF "%ERRORS%"=="false" (EXIT /B 0)
+IF "%ERRORS%"=="false" (
+    ECHO "NO ERRORS FOUND -> %ERRORS%"
+    EXIT /B 0
+)
 ECHO "ERRORS FOUND -> %ERRORS%"
-ENDLOCAL
 EXIT /B 1
+ENDLOCAL
 
 
 :assert_in_output
