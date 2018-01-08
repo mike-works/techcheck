@@ -1,0 +1,40 @@
+{
+  "name": "techcheck",
+  "version": "0.0.1",
+  "description": "Project Setup & Dependency Verification Tools",
+  "main": "dist/index.js",
+  "scripts": {
+    "build": "scripty",
+    "build:ts": "scripty",
+    "tslint": "scripty",
+    "watch": "scripty",
+    "watch:ts": "scripty",
+    "watch:node": "scripty",
+    "test": "scripty",
+    "test:watch": "scripty"
+  },
+  "bin": {
+    "techcheck": "./bin/techcheck"
+  },
+  "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "exit": "^0.1.2",
+    "resolve": "^1.5.0"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.0.10",
+    "@types/mocha": "^2.2.45",
+    "@types/node": "^8.5.2",
+    "chai": "^4.1.2",
+    "concurrently": "^3.5.1",
+    "mocha": "^4.0.1",
+    "mocha-typescript": "^1.1.12",
+    "nodemon": "^1.14.3",
+    "scripty": "^1.7.2",
+    "source-map-support": "^0.5.0",
+    "ts-node": "^4.1.0",
+    "tslint-config-airbnb": "^5.4.2",
+    "typescript": "^2.6.2"
+  }
+}
