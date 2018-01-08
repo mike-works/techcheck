@@ -3,4 +3,7 @@ node_js:
 - '4'
 - 'stable'
 
+after_install:
+  - npm install -g mocha-typescript
+
 script: npm run test:ci
