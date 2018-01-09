@@ -7,7 +7,9 @@
       "ter-arrow-parens": false,
       "max-line-length": false,
       "space-before-function-paren": false,
-      "align": false
+      "align": false,
+      "quotemark": false,
+      "import-name": false
     }
   }
   

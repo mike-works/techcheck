@@ -1,2 +1,2 @@
 #!/bin/bash
-npm run build:ts && npm run tslint
+npm run build:ts && npm run lint:ts

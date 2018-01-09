@@ -1,16 +1,24 @@
 {
-  "compilerOptions": {
-      "module": "commonjs",
-      "target": "es5",
-      "experimentalDecorators": true,
-      "noUnusedParameters": true,
-      "strict": true,
-      "declaration": true,
-      "lib": [
-          "esnext"
-      ],
-      "noImplicitAny": true,
-      "moduleResolution": "node",
-      "sourceMap": true
-  }
+    "compilerOptions": {
+        "module": "amd",
+        "target": "es5",
+        "experimentalDecorators": true,
+        "noUnusedParameters": true,
+        "outDir": "dist",
+        "allowJs": true,
+        "strict": true,
+        "baseUrl": ".",
+        "outFile": "dist/index.js",
+        "declaration": false,
+        "lib": [
+            "esnext"
+        ],
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true
+    },
+    "include": [
+        "src",
+        "node_modules/exit/lib/exit.js"
+    ]
 }
