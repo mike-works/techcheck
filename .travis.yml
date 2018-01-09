@@ -4,11 +4,6 @@ node_js:
 - '4'
 - 'stable'
 
-env:
-  - TEST_SUITE=SHELL
-  - TEST_SUITE=LINT
-  - TEST_SUITE=UNIT
-
 matrix:
   include:
     - node_js: '0.10'
