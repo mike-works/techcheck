@@ -4,8 +4,8 @@
 # Node.js version checking
 # (c) 2018 Mike Works, Inc.
 
-TECHCHECK_MIN_NODE_VERSION="4.5.0"
-
+MIN_NODE_VERSION=${TECHCHECK_MIN_NODE_VERSION:-"4.5.0"}
+NODE_CMD=${TECHCHECK_NODE_CMD:-node}
 function log() {
     if [ ! -z ${DEBUG_SHELL+x } ];
     then
@@ -27,7 +27,7 @@ function normalize_version_string()
 # Attempt to find the path of node, and assign# it to the provided variable
 #################################
 function get_node_path() {
-    NODE_PATH=$(which node)
+    NODE_PATH=$(which $NODE_CMD)
     if [ -z $NODE_PATH ]; then
         echo "[techcheck] ⛔️ ERROR: No node.js found on this system!"
         echo "               Go to https://nodejs.org and follow installation instructions"
@@ -182,7 +182,7 @@ function semverGT() {
 function assert_node_version() {
     local CURRENT_NODE_VERSION
     get_node_version CURRENT_NODE_VERSION
-    semverGT $CURRENT_NODE_VERSION $TECHCHECK_MIN_NODE_VERSION
+    semverGT $CURRENT_NODE_VERSION $MIN_NODE_VERSION
     local SEMVER_CHECK_RETURN_CODE=$?
     if [ "$SEMVER_CHECK_RETURN_CODE" -eq "1" ]; then
         echo "[node_version] ⛔️  ERROR: Node.js version $CURRENT_VERSION is too old. We can't even check the rest of your dependencies yet!"
