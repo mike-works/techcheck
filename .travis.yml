@@ -10,8 +10,6 @@ matrix:
       env: TEST_SUITE=LINT
     - node_js: 'stable'
       env: TEST_SUITE=UNIT
-    - node_js: '4'
-      env: TEST_SUITE=UNIT
 
 after_install:
   - npm install -g mocha-typescript
