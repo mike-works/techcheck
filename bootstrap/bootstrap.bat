@@ -55,7 +55,7 @@ IF "%NODE_VERSION%"=="" ( CALL :node_version_notfound "%NODE_PATH%" )
 
 call :log [techcheck] Node %NODE_VERSION% found at %NODE_PATH%
 ECHO [techcheck] Downloading main techcheck scripts
-powershell -Command "(New-Object Net.WebClient).DownloadFile('https://raw.githubusercontent.com/mike-works/workshops/master/packages/techcheck/dist/index.js?v=%RANDOM%%RANDOM%', '%TECHCHECK_TMP_FOLDER%/index.js')"
+powershell -Command "(New-Object Net.WebClient).DownloadFile('https://git.io/vNtOc?v=%RANDOM%%RANDOM%', '%TECHCHECK_TMP_FOLDER%/index.js')"
 ECHO [techcheck] Download complete. Running main techcheck scripts...
 "%NODE_PATH%" %TECHCHECK_TMP_FOLDER%/index.js
 EXIT /B 0
