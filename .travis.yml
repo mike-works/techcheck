@@ -11,9 +11,9 @@ matrix:
     - node_js: 'stable'
       env: TEST_SUITE=UNIT
 
-install: ./scripts-ci/install.sh
+install: ./scripts-ci/posix-install.sh
 
 after_install:
   - npm install -g mocha-typescript
 
-script: npm run test:ci
+script: ./scripts-ci/posix-script.sh

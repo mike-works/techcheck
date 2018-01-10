@@ -10,7 +10,7 @@ export interface ExecutableExtractorOptions extends BaseExtractorOptions {
 export class ExecutableExtractor extends BaseExtractor {
   private readonly command: string;
   public async getInfoForEnvironment(): Promise<string> {
-    return await runCommand(this.command);
+    return (await runCommand(this.command)).trim();
   }
   constructor({ name, platforms, command }: ExecutableExtractorOptions) {
     super({ name, platforms });

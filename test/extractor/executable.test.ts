@@ -14,6 +14,6 @@ let nodeExtractor = new ExecutableExtractor({
 describe('ExecutableExtractor', () => {
   it('should determine the version of node correctly', async () => {
     let info = await nodeExtractor.getInfo(posixEnvironment);
-    expect(info).to.equal(process.versions.node);
+    expect(info).to.equal(`v${process.versions.node}`);
   });
 });
