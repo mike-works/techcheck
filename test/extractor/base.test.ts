@@ -16,7 +16,9 @@ class TestExtractor extends BaseExtractor {
 describe('BaseExtractor', () => {
   it('should throw if run on a platform it does not support', async () => {
     let ex = new TestExtractor({ name: 'test', platforms: [Platform.Win32] });
-    expect(ex.getInfo(posixEnvironment)).to.be.rejectedWith('does not support');
+    await expect(ex.getInfo(posixEnvironment)).to.be.rejectedWith(
+      'does not support'
+    );
   });
 
   it('should operate without throwing on platforms it does support', async () => {
