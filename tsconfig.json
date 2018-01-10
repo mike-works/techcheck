@@ -1,24 +1,27 @@
 {
     "compilerOptions": {
-        "module": "amd",
+        "moduleResolution": "node",
         "target": "es5",
-        "experimentalDecorators": true,
-        "noUnusedParameters": true,
-        "outDir": "dist",
-        "allowJs": true,
-        "strict": true,
-        "baseUrl": ".",
-        "outFile": "dist/index.js",
-        "declaration": false,
+        "module": "es2015",
         "lib": [
             "esnext"
         ],
-        "noImplicitAny": true,
-        "moduleResolution": "node",
-        "sourceMap": true
+        "strict": true,
+        "sourceMap": true,
+        "declaration": true,
+        "allowSyntheticDefaultImports": true,
+        "experimentalDecorators": true,
+        "emitDecoratorMetadata": true,
+        "declarationDir": "dist/types",
+        "outDir": "dist/es",
+        "typeRoots": [
+            "node_modules/@types"
+        ]
     },
+    "exclude": [
+        "dist"
+    ],
     "include": [
-        "src",
-        "node_modules/exit/lib/exit.js"
+        "src"
     ]
 }

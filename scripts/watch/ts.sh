@@ -1,2 +1,2 @@
 #!/bin/bash
-tsc -w
+ ./node_modules/.bin/rollup -c rollup.config.js --watch

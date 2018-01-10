@@ -1,4 +1,4 @@
-import * as os from 'os';
+import { platform as nodePlatform } from 'os';
 
 export enum Platform {
   Win32,
@@ -6,7 +6,14 @@ export enum Platform {
   Unsupported
 }
 
-export const POSIX_PLATFORMS: NodeJS.Platform[] = ['aix', 'darwin', 'freebsd', 'linux', 'openbsd', 'cygwin'];
+export const POSIX_PLATFORMS: NodeJS.Platform[] = [
+  'aix',
+  'darwin',
+  'freebsd',
+  'linux',
+  'openbsd',
+  'cygwin'
+];
 
 export function isPlatform(platform: Platform): boolean {
   return getPlatform() === platform;
@@ -23,7 +30,7 @@ export function platformFor(platform: NodeJS.Platform): Platform {
 }
 
 export function getPlatform(): Platform {
-  let p = os.platform();
+  let p = nodePlatform();
   return platformFor(p);
 }
 
