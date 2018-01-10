@@ -2,26 +2,23 @@
     "compilerOptions": {
         "moduleResolution": "node",
         "target": "es5",
-        "module": "es2015",
+        "module": "commonjs",
         "lib": [
             "esnext"
         ],
+        "baseUrl": ".",
         "strict": true,
+        "outFile": "dist/index.js",
         "sourceMap": true,
         "declaration": true,
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
-        "emitDecoratorMetadata": true,
-        "declarationDir": "dist/types",
-        "outDir": "dist/es",
-        "typeRoots": [
-            "node_modules/@types"
-        ]
+        "emitDecoratorMetadata": true
     },
-    "exclude": [
-        "dist"
-    ],
     "include": [
         "src"
+    ],
+    "exclude": [
+        "dist"
     ]
 }

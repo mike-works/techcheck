@@ -15,6 +15,8 @@ export const POSIX_PLATFORMS: NodeJS.Platform[] = [
   'cygwin'
 ];
 
+export type SupportedPlatform = Platform.Posix | Platform.Win32;
+
 export function isPlatform(platform: Platform): boolean {
   return getPlatform() === platform;
 }

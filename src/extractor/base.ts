@@ -1,15 +1,28 @@
-import { Platform } from '../enums/platform';
+import { Platform, SupportedPlatform } from '../enums/platform';
 import Environment from '../environment';
 
 export interface BaseExtractorOptions {
   name: string;
-  platforms: Platform[];
+  platforms: SupportedPlatform[];
 }
 
-export abstract class BaseExtractor<Opts = {}, Info = string> {
-  public readonly platforms: Platform[];
+export abstract class BaseExtractor<Opts = {}> {
+  public readonly platforms: SupportedPlatform[];
   public readonly name: string;
-  public abstract async getInfo(env: Environment, opts: Opts): Promise<Info>;
+  public handlesPlatform(platform: Platform) {
+    return (this.platforms as Platform[]).indexOf(platform) >= 0;
+  }
+  public async getInfo(env: Environment, opts?: Opts): Promise<string> {
+    if (!this.handlesPlatform(env.platform))
+      throw new Error(
+        `Extractor ${this.name} does not support ${Platform[env.platform]}`
+      );
+    return this.getInfoForEnvironment(env, opts);
+  }
+  protected abstract async getInfoForEnvironment(
+    env: Environment,
+    opts?: Opts
+  ): Promise<string>;
   constructor({ name, platforms }: BaseExtractorOptions) {
     this.platforms = platforms;
     this.name = name;
