@@ -4,6 +4,7 @@ import Environment from '../../src/environment';
 import { Platform } from '../../src/enums/platform';
 import { posixEnvironment } from '../helpers';
 import * as semver from 'semver';
+import { BaseExtractor } from '../../src/extractor/base';
 
 describe('ExecutableExtractor', () => {
   it('should determine the version of node correctly', async () => {
@@ -12,7 +13,9 @@ describe('ExecutableExtractor', () => {
       platforms: [Platform.Win32, Platform.Posix],
       command: 'node -v'
     });
-    let info = await nodeExtractor.getInfo(posixEnvironment);
+    let info = BaseExtractor.unbrand(
+      await nodeExtractor.getInfo(posixEnvironment)
+    );
     expect(info).to.equal(`v${process.versions.node}`);
   });
 

@@ -4,6 +4,7 @@ import ExecutableExtractor from '../../src/extractor/executable';
 import Environment from '../../src/environment';
 import { Platform } from '../../src/enums/platform';
 import { posixEnvironment, winEnvironment } from '../helpers';
+import { BaseExtractor } from '../../src/extractor/base';
 
 describe('OrExtractor', () => {
   it('should choose between commands for two environments correctly', async () => {
@@ -23,11 +24,15 @@ describe('OrExtractor', () => {
       ]
     });
     let info = {
-      posix: await comboExtractor.getInfo(posixEnvironment),
-      win: await comboExtractor.getInfo(winEnvironment)
+      posix: BaseExtractor.unbrand(
+        await comboExtractor.getInfo(posixEnvironment)
+      ),
+      win: BaseExtractor.unbrand(await comboExtractor.getInfo(winEnvironment))
     };
     expect(info.posix).to.equal(`v${process.versions.node}`);
-    expect(info.win).to.equal(await git.getInfo(winEnvironment));
+    expect(info.win).to.equal(
+      BaseExtractor.unbrand(await git.getInfo(winEnvironment))
+    );
   });
 
   it('should throw if an overlap in environments exists', async () => {

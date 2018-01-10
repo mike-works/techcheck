@@ -1,10 +1,13 @@
-import BaseExtractor from './base';
+import BaseExtractor, { ExtractorValue } from './base';
 import { Platform, SupportedPlatform } from '../enums/platform';
 import Environment from '../environment';
 
 export default class OrExtractor extends BaseExtractor {
   private extractors: BaseExtractor[];
-  public getInfoForEnvironment(env: Environment, opts: {}): Promise<string> {
+  public getInfoForEnvironment(
+    env: Environment,
+    opts: {}
+  ): Promise<ExtractorValue> {
     for (let i = 0; i < this.extractors.length; i++) {
       if (this.extractors[i].handlesPlatform(env.platform)) {
         return this.extractors[i].getInfo(env, opts);
