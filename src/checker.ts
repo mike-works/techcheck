@@ -1,31 +1,32 @@
 import * as semver from 'semver';
+import { ExtractorValue, BaseExtractor } from './extractor/base';
 
-export type ValueAdjuster = RegExp | ((raw: string) => string);
+export type ValueFormatter = RegExp | ((raw: string) => string);
 export type SemVerMatcher = { range?: string; min?: string; max?: string };
+
 export type ValueMatcher =
   | RegExp
   | string
   | { semver: SemVerMatcher }
   | ((raw: string) => boolean);
-export type ExtractorValue = string;
 
 export interface BaseCheckerOptions {
-  preprocessor?: ValueAdjuster;
+  preprocessor?: ValueFormatter;
   matcher: ValueMatcher;
   name: string;
 }
 
 function normalizeExtractorValue(
   v: ExtractorValue,
-  adj: ValueAdjuster
-): ExtractorValue {
+  adj: ValueFormatter
+): string {
   if (adj instanceof RegExp) {
-    let parts = adj.exec(v);
+    let parts = adj.exec(BaseExtractor.unbrand(v));
     if (parts === null || parts.length === 0)
       throw new Error(`Could not normalize value ${v} with ${adj}`);
     return parts[0];
   }
-  return adj(v);
+  return adj(BaseExtractor.unbrand(v));
 }
 
 function doesSemverMatch(version: string, m: SemVerMatcher): boolean {
@@ -45,17 +46,18 @@ function doesSemverMatch(version: string, m: SemVerMatcher): boolean {
   throw new Error(`Invalid SemVerMatcher object ${JSON.stringify(m)}`);
 }
 
-function doesMatch(v: ExtractorValue, m: ValueMatcher) {
+function doesMatch(v: ExtractorValue | string, m: ValueMatcher): boolean {
+  let val = typeof v === 'string' ? v : BaseExtractor.unbrand(v);
   if (m instanceof RegExp) {
-    return m.test(v);
+    return m.test(val);
   }
   if (typeof m === 'string') {
-    return m === v;
+    return m === val;
   }
   if (m instanceof Function) {
-    return m(v);
+    return m(val);
   }
-  return doesSemverMatch(v, m.semver);
+  return doesSemverMatch(val, m.semver);
 }
 
 function validateOptions(opts: BaseCheckerOptions) {
@@ -69,7 +71,7 @@ function validateOptions(opts: BaseCheckerOptions) {
 }
 
 export class BaseChecker {
-  protected preprocessor?: ValueAdjuster;
+  protected preprocessor?: ValueFormatter;
   protected matcher?: ValueMatcher;
   public readonly name: string;
   constructor(opts: BaseCheckerOptions) {
@@ -78,7 +80,7 @@ export class BaseChecker {
     this.matcher = opts.matcher;
     this.name = opts.name;
   }
-  public isOk(v: ExtractorValue) {
+  public async isOk(v: ExtractorValue): Promise<boolean> {
     let normalized =
       typeof this.preprocessor !== 'undefined'
         ? normalizeExtractorValue(v, this.preprocessor)

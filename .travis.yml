@@ -4,6 +4,12 @@ matrix:
   include:
     - node_js: '0.10'
       env: TEST_SUITE=SHELL
+    - node_js: '4'
+      env: TEST_SUITE=SHELL
+    - node_js: '6'
+      env: TEST_SUITE=SHELL
+    - node_js: '8'
+      env: TEST_SUITE=SHELL
     - node_js: 'stable'
       env: TEST_SUITE=SHELL
     - node_js: 'stable'
