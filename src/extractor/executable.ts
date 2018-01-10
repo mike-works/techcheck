@@ -17,3 +17,5 @@ export class ExecutableExtractor extends BaseExtractor {
     this.command = command;
   }
 }
+
+export default ExecutableExtractor;

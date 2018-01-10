@@ -11,6 +11,8 @@ matrix:
     - node_js: 'stable'
       env: TEST_SUITE=UNIT
 
+install: ./scripts-ci/install.sh
+
 after_install:
   - npm install -g mocha-typescript
 
