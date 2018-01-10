@@ -19,11 +19,14 @@ export default class OrExtractor extends BaseExtractor {
       .map(e => e.platforms)
       .reduce((arr, thisPlatforms) => {
         let toAdd: SupportedPlatform[] = [];
-        thisPlatforms.forEach(p => {
+        for (let i = 0; i < thisPlatforms.length; i++) {
+          let p = thisPlatforms[i];
           if (arr.indexOf(p) < 0 && toAdd.indexOf(p) < 0) {
             toAdd.push(p);
+          } else {
+            throw new Error('Platform overlap detected!');
           }
-        });
+        }
         return arr.concat(toAdd);
       }, []);
     super({
