@@ -1591,20 +1591,25 @@ var Evaluator = /** @class */ (function () {
         return __awaiter(this, void 0, void 0, function () {
             var c, e, result;
             return __generator(this, function (_a) {
-                c = new BaseChecker({
-                    name: 'try',
-                    matcher: { semver: { range: '>= 1.0.0' } }
-                });
-                e = new ExecutableExtractor({
-                    name: 'openssl',
-                    command: 'openssl version',
-                    platforms: [Platform$1.Win32, Platform$1.Posix]
-                });
-                result = c.isOk(BaseExtractor.brand('1.9.1'));
-                if (result) {
-                    return [2 /*return*/, { status: EvaluatorStatus.Ok }];
+                switch (_a.label) {
+                    case 0:
+                        c = new BaseChecker({
+                            name: 'try',
+                            matcher: { semver: { range: '>= 1.0.0' } }
+                        });
+                        e = new ExecutableExtractor({
+                            name: 'openssl',
+                            command: 'openssl version',
+                            platforms: [Platform$1.Win32, Platform$1.Posix]
+                        });
+                        return [4 /*yield*/, c.isOk(BaseExtractor.brand('1.9.1'))];
+                    case 1:
+                        result = _a.sent();
+                        if (result) {
+                            return [2 /*return*/, { status: EvaluatorStatus.Ok }];
+                        }
+                        return [2 /*return*/, { status: EvaluatorStatus.Error }];
                 }
-                return [2 /*return*/, { status: EvaluatorStatus.Error }];
             });
         });
     };
