@@ -5,6 +5,8 @@ elif [ "$TEST_SUITE" == "LINT" ]; then
   npm run lint:ts
 elif [ "$TEST_SUITE" == "UNIT" ]; then
   node_modules/.bin/mocha -o test/mocha.opts
+elif [ "$TEST_SUITE" == "ACCEPTANCE" ]; then
+  echo "ACCEPTANCE test suite TODO"
 else
   echo "no TEST_SUITE defined"
   exit 1

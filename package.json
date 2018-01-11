@@ -27,6 +27,7 @@
   "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
   "license": "GPL-3.0",
   "dependencies": {
+    "es6-promise": "^4.2.2",
     "semver": "^5.4.1"
   },
   "devDependencies": {
