@@ -3,6 +3,10 @@
   "version": "0.0.1",
   "description": "Project Setup & Dependency Verification Tools",
   "main": "dist/index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/mike-works/techcheck"
+  },
   "scripts": {
     "build": "scripty",
     "build:ts": "scripty",
@@ -14,8 +18,11 @@
     "test:ci": "scripty",
     "test:watch": "scripty"
   },
+  "engines": {
+    "node": ">= 0.10"
+  },
   "bin": {
-    "techcheck": "./bin/techcheck"
+    "techcheck": "./bin/techcheck.js"
   },
   "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
   "license": "GPL-3.0",
@@ -31,17 +38,16 @@
     "@types/semver": "^5.4.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
-    "concurrently": "^3.5.1",
     "lodash.camelcase": "^4.3.0",
     "mocha": "^4.0.1",
     "mocha-typescript": "^1.1.12",
     "nodemon": "^1.14.3",
-    "rollup": "^0.53.3",
+    "rollup": "^0.53.4",
     "rollup-plugin-commonjs": "^8.2.6",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.9.0",
+    "rollup-plugin-typescript": "^0.8.1",
     "rollup-plugin-uglify": "^2.0.1",
     "scripty": "^1.7.2",
     "source-map-support": "^0.5.0",

@@ -1,17 +1,9 @@
 import Checker from './checker';
-import { ExecutableExtractor } from './extractor/executable';
-import { Platform } from './enums/platform';
-import { BaseExtractor } from './extractor/base';
-let c = new Checker({
-  name: 'try',
-  matcher: { semver: { range: '>= 1.0.0' } }
-});
+import Evaluator from './evaluator';
 
-let e = new ExecutableExtractor({
-  name: 'openssl',
-  command: 'openssl version',
-  platforms: [Platform.Win32, Platform.Posix]
-});
+(async function() {
+  let e = new Evaluator({});
 
-let result = c.isOk(BaseExtractor.brand('1.9.1'));
-console.log('result = ', result);
+  let status = await e.evaluate();
+  console.log('status=', status);
+})();
