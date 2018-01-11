@@ -30,7 +30,7 @@ export class Evaluator {
       platforms: [Platform.Win32, Platform.Posix]
     });
 
-    let result = c.isOk(BaseExtractor.brand('1.9.1'));
+    let result = await c.isOk(BaseExtractor.brand('1.9.1'));
     if (result) {
       return { status: EvaluatorStatus.Ok };
     }
