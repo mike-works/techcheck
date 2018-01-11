@@ -18,6 +18,14 @@ matrix:
       env: TEST_SUITE=UNIT
     - node_js: 'stable'
       env: TEST_SUITE=UNIT
+    - node_js: '0.10'
+      env: TEST_SUITE=ACCEPTANCE
+    - node_js: '4'
+      env: TEST_SUITE=ACCEPTANCE
+    - node_js: '8'
+      env: TEST_SUITE=ACCEPTANCE
+    - node_js: 'stable'
+      env: TEST_SUITE=ACCEPTANCE
 
 install: ./scripts-ci/posix-install.sh
 
