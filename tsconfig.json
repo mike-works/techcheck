@@ -4,13 +4,13 @@
         "target": "es5",
         "module": "commonjs",
         "lib": [
-            "esnext"
+            "es2015.promise",
+            "es5"
         ],
         "baseUrl": ".",
         "strict": true,
-        "outFile": "dist/index.js",
+        "outDir": "dist",
         "sourceMap": true,
-        "declaration": true,
         "allowSyntheticDefaultImports": true,
         "experimentalDecorators": true,
         "emitDecoratorMetadata": true

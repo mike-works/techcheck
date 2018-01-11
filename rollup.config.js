@@ -2,9 +2,8 @@ import resolve from 'rollup-plugin-node-resolve';
 import commonjs from 'rollup-plugin-commonjs';
 import sourceMaps from 'rollup-plugin-sourcemaps';
 import camelCase from 'lodash.camelcase';
-import typescriptPlugin from 'rollup-plugin-typescript';
+import typescriptPlugin from 'rollup-plugin-typescript2';
 import uglify from 'rollup-plugin-uglify';
-import typescript from 'typescript';
 
 const pkg = require('./package.json');
 
@@ -13,9 +12,7 @@ const libraryName = 'techcheck';
 /** @type {any[]} */
 const plugins = [
   // Compile TypeScript files
-  typescriptPlugin({
-    typescript
-  }),
+  typescriptPlugin(),
   // Allow bundling cjs modules (unlike webpack, rollup doesn't understand cjs)
   commonjs(),
   // Allow node_modules resolution, so you can use 'external' to control
