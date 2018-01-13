@@ -1,15 +1,15 @@
 {
-    "extends": "tslint-config-airbnb",
-    "rules": {
-      "trailing-comma": false,
-      "prefer-const": false,
-      "no-increment-decrement": false,
-      "ter-arrow-parens": false,
-      "max-line-length": false,
-      "space-before-function-paren": false,
-      "align": false,
-      "quotemark": false,
-      "import-name": false
-    }
+  "extends": "tslint-config-airbnb",
+  "rules": {
+    "trailing-comma": false,
+    "prefer-const": false,
+    "no-increment-decrement": false,
+    "ter-arrow-parens": false,
+    "max-line-length": false,
+    "space-before-function-paren": false,
+    "align": false,
+    "quotemark": false,
+    "import-name": false,
+    "strict-boolean-expressions": false
   }
-  
+}

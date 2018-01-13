@@ -4,13 +4,16 @@ import Environment from '../environment';
 
 export default class OrExtractor extends BaseExtractor {
   private extractors: BaseExtractor[];
-  public getInfoForEnvironment(
+  public async getInfoForEnvironment(
     env: Environment,
+    cmd: string,
     opts: {}
   ): Promise<ExtractorValue> {
+    // console.log(JSON.stringify([env, cmd, opts]));
     for (let i = 0; i < this.extractors.length; i++) {
       if (this.extractors[i].handlesPlatform(env.platform)) {
-        return this.extractors[i].getInfo(env, opts);
+        let result = await this.extractors[i].getInfo(env, opts);
+        return BaseExtractor.brand(result.normalized);
       }
     }
     throw new Error(
@@ -34,6 +37,7 @@ export default class OrExtractor extends BaseExtractor {
       }, []);
     super({
       platforms,
+      normalizerOptions: {},
       name: `Or (${extractors.map(e => e.name).join(', ')})`
     });
     this.extractors = extractors;
