@@ -31,6 +31,9 @@ after_install:
 - npm install -g mocha-typescript
 script: "./scripts-ci/posix-script.sh"
 
+after_success:
+- npm run prepare-release
+
 deploy:
   provider: s3
   access_key_id: AKIAJWIEOB2WJZOHIKVQ
