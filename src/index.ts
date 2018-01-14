@@ -1,6 +1,6 @@
 import Evaluator, { EvaluatorStatus } from './evaluator';
 import 'es6-promise/auto';
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { ProjectConfig } from './project/config';
 import { indentError } from './utils/format-error';
 import { ExtractorRegistry } from './extractor/registry';
@@ -30,13 +30,16 @@ async function projectSetup(): Promise<{
   try {
     await config.setup();
   } catch (e) {
-    let err = e as Error;
-    err.message = indentError(
-      'Unable to setup project config',
-      '  ',
-      err.message
-    );
-    throw err;
+    if (e instanceof Error) {
+      e.message = indentError(
+        'Unable to setup project config',
+        '  ',
+        e.message
+      );
+      throw e;
+    } else {
+      throw e;
+    }
   }
   return { config };
 }
@@ -63,14 +66,15 @@ async function main(): Promise<boolean> {
   let ok = await main();
   process.exit(ok ? 0 : 1);
 })().catch(e => {
-  let err = e as Error;
-  let message: string = `${e}`;
-  if (e instanceof Error && e.stack) {
-    message = e.stack;
+  if (e instanceof Error) {
+    let message: string = `${e}`;
+    if (e instanceof Error && e.stack) {
+      message = e.stack;
+    }
+    message = message
+      .split('\n')
+      .map(x => chalk.red(x))
+      .join('\n');
+    console.error(chalk.red(message));
   }
-  message = message
-    .split('\n')
-    .map(x => chalk.red(x))
-    .join('\n');
-  console.error(chalk.red(message));
 });

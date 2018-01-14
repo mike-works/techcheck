@@ -3323,12 +3323,12 @@ var Environment = /** @class */ (function () {
 
 function successMessage(s, r) {
     var str = "  \u2705  " + r.name + "\t" + r.message;
-    str += undefined("\t(required: " + formatMatcher(r.target) + " )");
+    str += chalk.grey("\t(required: " + formatMatcher(r.target) + " )");
     s.write(str + '\n');
 }
 function failMessage(s, r) {
     var str = "  \uD83D\uDED1  " + r.name + "\t" + r.message;
-    str += undefined("\t(required: " + formatMatcher(r.target) + " )");
+    str += chalk.grey("\t(required: " + formatMatcher(r.target) + " )");
     s.write(str + '\n');
 }
 function warnMessage(s, r) {
@@ -3339,7 +3339,7 @@ function errorMessage(s, r) {
 }
 function formatExtractorResults(s, results) {
     s.write('\n' +
-        undefined("🔍 TechCheck Scan: Making sure you're all set up 🔎") +
+        chalk.yellow("🔍 TechCheck Scan: Making sure you're all set up 🔎") +
         '\n');
     s.write(' ------------------------------------------------\n');
     results.forEach(function (r) {
@@ -3355,30 +3355,30 @@ function formatExtractorResults(s, results) {
 }
 function formatMatcher(valueMatcher) {
     if (typeof valueMatcher === 'string') {
-        return '= ' + undefined("\"" + valueMatcher + "\"");
+        return '= ' + chalk.yellow("\"" + valueMatcher + "\"");
     }
     if (valueMatcher instanceof RegExp) {
-        return '~ ' + undefined("/" + valueMatcher.source + "/");
+        return '~ ' + chalk.magenta("/" + valueMatcher.source + "/");
     }
     if (valueMatcher instanceof Function) {
-        return undefined("" + valueMatcher.toString());
+        return chalk.cyan("" + valueMatcher.toString());
     }
     if (valueMatcher.semver) {
         var sv = valueMatcher.semver;
         if (typeof sv === 'string') {
-            return undefined("" + sv);
+            return chalk.green("" + sv);
         }
         if (sv.range) {
-            return undefined("" + sv.range);
+            return chalk.green("" + sv.range);
         }
         if (sv.min && sv.max) {
-            return undefined(">= " + sv.min + " && <= " + sv.max);
+            return chalk.green(">= " + sv.min + " && <= " + sv.max);
         }
         if (sv.min) {
-            return undefined(">= " + sv.min);
+            return chalk.green(">= " + sv.min);
         }
         if (sv.max) {
-            return undefined("<= " + sv.max);
+            return chalk.green("<= " + sv.max);
         }
     }
 }
@@ -3409,7 +3409,7 @@ function coreSetup() {
 }
 function projectSetup() {
     return __awaiter(this, void 0, void 0, function () {
-        var config, e_2, err;
+        var config, e_2;
         return __generator(this, function (_a) {
             switch (_a.label) {
                 case 0:
@@ -3423,9 +3423,14 @@ function projectSetup() {
                     return [3 /*break*/, 4];
                 case 3:
                     e_2 = _a.sent();
-                    err = e_2;
-                    err.message = indentError('Unable to setup project config', '  ', err.message);
-                    throw err;
+                    if (e_2 instanceof Error) {
+                        e_2.message = indentError('Unable to setup project config', '  ', e_2.message);
+                        throw e_2;
+                    }
+                    else {
+                        throw e_2;
+                    }
+                    return [3 /*break*/, 4];
                 case 4: return [2 /*return*/, { config: config }];
             }
         });
@@ -3473,14 +3478,16 @@ function main() {
         });
     });
 })().catch(function (e) {
-    var message = "" + e;
-    if (e instanceof Error && e.stack) {
-        message = e.stack;
+    if (e instanceof Error) {
+        var message = "" + e;
+        if (e instanceof Error && e.stack) {
+            message = e.stack;
+        }
+        message = message
+            .split('\n')
+            .map(function (x) { return chalk.red(x); })
+            .join('\n');
+        console.error(chalk.red(message));
     }
-    message = message
-        .split('\n')
-        .map(function (x) { return undefined(x); })
-        .join('\n');
-    console.error(undefined(message));
 });
 //# sourceMappingURL=index.js.map

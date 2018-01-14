@@ -16,9 +16,10 @@
     <img title='GreenKeeper' src='https://badges.greenkeeper.io/mike-works/techcheck.svg'>
   </a>
 </p>
-
 <p align='center'>
-<b>TechCheck</b> is a utility that we use for <a title="Mike.Works" href="https://mike.works">Mike.Works</a> <a href='https://mike.works/courses'>software engineering training</a> to help guide students toward getting set up with the proper dependencies.
+<b>TechCheck</b> is a utility that we use for <a title="Mike.Works" href="https://mike.works">Mike.Works</a> <a href='https://mike.works/courses'>software engineering training</a> to run pre-flight checks, ensuring attendees are set up with the right versions of the right software.
+
+<img width="557" alt="screen shot 2018-01-13 at 6 22 33 pm" src="https://user-images.githubusercontent.com/558005/34912169-c8db2ea8-f88e-11e7-9361-5c8cdb1f9630.png">
 </p>
 
 ## How it works

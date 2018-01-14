@@ -1,4 +1,4 @@
-import * as chalk from 'chalk';
+import chalk from 'chalk';
 import { ExtractorResult } from './extractor/base';
 import { EvaluatorResult, EvaluatorStatus } from './evaluator';
 import { ValueMatcher } from './checker';
