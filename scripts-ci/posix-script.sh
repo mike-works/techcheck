@@ -6,6 +6,7 @@ elif [ "$TEST_SUITE" == "LINT" ]; then
 elif [ "$TEST_SUITE" == "UNIT" ]; then
   node_modules/.bin/mocha -o test/mocha.opts
 elif [ "$TEST_SUITE" == "ACCEPTANCE" ]; then
+  npm run build
   node dist/index.js
 else
   echo "no TEST_SUITE defined"
