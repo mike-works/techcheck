@@ -1,6 +1,6 @@
 import Platform from './enums/platform';
 import ExecutableExtractor from './extractor/executable';
-import BaseExtractor from './extractor/base';
+import BaseExtractor, { ExtractorResult } from './extractor/base';
 import { ProjectConfig } from './project/config';
 import { indentError } from './utils/format-error';
 import Environment from './environment';
@@ -50,7 +50,19 @@ export class Evaluator {
           throw new Error(
             `Found item in "root.verify[${i}]" pertaining to unknown extractor: ${name}`
           );
-        let extractorResult = await ex.getInfo(this.env, v);
+        let extractorResult: ExtractorResult;
+        try {
+          extractorResult = await ex.getInfo(this.env, v);
+        } catch (e) {
+          extractorResult = {
+            name: ex.name,
+            raw: 'NOT FOUND',
+            cmd: '',
+            normalized: 'NOT FOUND',
+            target: v.version as ValueMatcher,
+            match: false
+          };
+        }
         return extractorResult;
       })
     );
