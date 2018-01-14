@@ -37,7 +37,7 @@ export default {
     {
       file: pkg.main,
       name: camelCase(libraryName),
-      format: 'cjs',
+      format: 'amd',
       sourcemap: true
     }
   ],
