@@ -42,7 +42,11 @@ export class ProjectConfig {
     return this.optionsModule;
   }
   public async setup() {
-    let optionsModule = await findConfig();
+    let optionsModule =
+      typeof global.TechCheckConfig !== 'undefined'
+        ? global.TechCheckConfig
+        : await findConfig();
+
     let messages = validateConfig(optionsModule);
     this.optionsModule = optionsModule;
     if (messages.length > 0) {
