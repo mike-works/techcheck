@@ -4,20 +4,28 @@ import { runCommand } from '../utils/run-command';
 import { Platform } from '../enums/platform';
 
 export interface ExecutableExtractorOptions extends BaseExtractorOptions {
-  command: string;
+  commands: {
+    [k: string]: string;
+  };
 }
 
 export class ExecutableExtractor extends BaseExtractor {
-  private readonly command: string;
-  public async getInfoForEnvironment(): Promise<ExtractorValue> {
+  private readonly commands: {
+    [k: string]: string;
+  };
+  public async getInfoForEnvironment(
+    env: Environment,
+    cmd: string,
+    opts: any
+  ): Promise<ExtractorValue> {
     return {
-      val: (await runCommand(this.command)).trim(),
+      val: (await runCommand(this.commands[cmd])).trim(),
       _brand: BaseExtractor.brandStamp
     };
   }
-  constructor({ name, platforms, command }: ExecutableExtractorOptions) {
-    super({ name, platforms });
-    this.command = command;
+  constructor(opts: ExecutableExtractorOptions) {
+    super(opts);
+    this.commands = JSON.parse(JSON.stringify(opts.commands));
   }
 }
 
