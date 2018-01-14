@@ -24,6 +24,7 @@ matrix:
   - node_js: '8'
     env: TEST_SUITE=ACCEPTANCE
   - node_js: stable
+    env: DEPLOY_ON_SUCCESS=true
     env: TEST_SUITE=ACCEPTANCE
 install: "./scripts-ci/posix-install.sh"
 after_install:
