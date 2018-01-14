@@ -12,7 +12,7 @@ elif [ "$TEST_SUITE" == "ACCEPTANCE" ]; then
   npm install
   npm run build
   nvm use $TRAVIS_NODE_VERSION
-  node dist/index.js
+  $(node dist/index.js)
 else
   echo "no TEST_SUITE defined"
   exit 1
