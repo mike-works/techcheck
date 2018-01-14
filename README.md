@@ -22,6 +22,8 @@
 <img width="557" alt="screen shot 2018-01-13 at 6 22 33 pm" src="https://user-images.githubusercontent.com/558005/34912169-c8db2ea8-f88e-11e7-9361-5c8cdb1f9630.png">
 </p>
 
+---
+
 ## How it works
 
 Most of techcheck requires [Node.js](https://nodejs.org/en/) to run, but to ensure that node itself is installed, we have users run a shell script (or poweshell script for windows users)
