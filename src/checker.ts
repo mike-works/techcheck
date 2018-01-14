@@ -66,8 +66,13 @@ function validateMatcher(matcher: ValueMatcher) {
 }
 
 export function isOk(v: string, matcher: ValueMatcher): boolean {
-  if (typeof matcher === 'undefined' || !validateMatcher(matcher))
-    throw new Error(`Invalid matcher: ${JSON.stringify(matcher)}`);
-  let matches = doesMatch(v, matcher);
-  return matches;
+  try {
+    if (typeof matcher === 'undefined' || !validateMatcher(matcher))
+      throw new Error(`Invalid matcher: ${JSON.stringify(matcher)}`);
+    let matches = doesMatch(v, matcher);
+    return matches;
+  } catch (e) {
+    console.warn(e);
+    return false;
+  }
 }

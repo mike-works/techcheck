@@ -18,8 +18,14 @@ export class ExecutableExtractor extends BaseExtractor {
     cmd: string,
     opts: any
   ): Promise<ExtractorValue> {
+    let commandResult;
+    try {
+      commandResult = (await runCommand(this.commands[cmd])).trim();
+    } catch (e) {
+      commandResult = 'NOT-FOUND';
+    }
     return {
-      val: (await runCommand(this.commands[cmd])).trim(),
+      val: commandResult,
       _brand: BaseExtractor.brandStamp
     };
   }

@@ -27,7 +27,7 @@ const NODE_EXTRACTOR = new ExecutableExtractor({
 const POSTGRES_EXTRACTOR = new ExecutableExtractor({
   name: 'PosgreSQL',
   platforms: [Platform.Win32, Platform.Posix],
-  commands: { version: 'pg_ctl --version' },
+  commands: { version: 'pg__ctl --version' },
   normalizerOptions: {
     preprocessor: /[0-9\.]+/
   }

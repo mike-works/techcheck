@@ -57,7 +57,7 @@ export class Evaluator {
     return results.map(r => {
       return {
         name: r.name,
-        message: `${r.cmd} ${r.normalized} ${
+        message: `${r.cmd} ${r.normalized || r.raw} ${
           r.match ? 'is OK    ' : 'is NOT OK'
         }`,
         found: r.normalized,
