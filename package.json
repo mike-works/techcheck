@@ -17,7 +17,8 @@
     "watch": "scripty",
     "test": "scripty",
     "test:ci": "scripty",
-    "test:watch": "scripty"
+    "test:watch": "scripty",
+    "prepare-release": "scripty"
   },
   "engines": {
     "node": ">= 0.10"
