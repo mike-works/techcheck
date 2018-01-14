@@ -1,35 +1,42 @@
 language: node_js
-
 matrix:
   include:
-    - node_js: '0.10'
-      env: TEST_SUITE=SHELL
-    - node_js: '4'
-      env: TEST_SUITE=SHELL
-    - node_js: '6'
-      env: TEST_SUITE=SHELL
-    - node_js: '8'
-      env: TEST_SUITE=SHELL
-    - node_js: 'stable'
-      env: TEST_SUITE=SHELL
-    - node_js: 'stable'
-      env: TEST_SUITE=LINT
-    - node_js: '4'
-      env: TEST_SUITE=UNIT
-    - node_js: 'stable'
-      env: TEST_SUITE=UNIT
-    - node_js: '0.10'
-      env: TEST_SUITE=ACCEPTANCE
-    - node_js: '4'
-      env: TEST_SUITE=ACCEPTANCE
-    - node_js: '8'
-      env: TEST_SUITE=ACCEPTANCE
-    - node_js: 'stable'
-      env: TEST_SUITE=ACCEPTANCE
-
-install: ./scripts-ci/posix-install.sh
-
+  - node_js: '0.10'
+    env: TEST_SUITE=SHELL
+  - node_js: '4'
+    env: TEST_SUITE=SHELL
+  - node_js: '6'
+    env: TEST_SUITE=SHELL
+  - node_js: '8'
+    env: TEST_SUITE=SHELL
+  - node_js: stable
+    env: TEST_SUITE=SHELL
+  - node_js: stable
+    env: TEST_SUITE=LINT
+  - node_js: '4'
+    env: TEST_SUITE=UNIT
+  - node_js: stable
+    env: TEST_SUITE=UNIT
+  - node_js: '0.10'
+    env: TEST_SUITE=ACCEPTANCE
+  - node_js: '4'
+    env: TEST_SUITE=ACCEPTANCE
+  - node_js: '8'
+    env: TEST_SUITE=ACCEPTANCE
+  - node_js: stable
+    env: TEST_SUITE=ACCEPTANCE
+install: "./scripts-ci/posix-install.sh"
 after_install:
-  - npm install -g mocha-typescript
-
-script: ./scripts-ci/posix-script.sh
+- npm install -g mocha-typescript
+script: "./scripts-ci/posix-script.sh"
+deploy:
+  provider: s3
+  access_key_id: AKIAJWIEOB2WJZOHIKVQ
+  secret_access_key:
+    secure: cSeGo4mCiILoXEevYeV5zwJq6kgec9HN+UJom0gY9N4Gdfi5JlG33CJUqWxzf32uFFtiv75LMNQQxPEs74vdpu1QbtA1ZXbJpZ4hc4nHXdhEdFxuTaptP9aevPuZvkpRiMAPQTWkzhfKQDWEGN2kyn19LcuHocwegIdbXG7+IDFw/jEUBpHvn7YIRDuNocVVvDvurQ4H1j2js/PWpTk8xfOGMYYlgsprra8bTZ0m/Ifg7/iiMMEecTahXdPWKLM9f96cxN1qHvD2gZO1XyWs6rhCJZ7k3wJfcFWepdNenQOoG46LxzfjAm8phybSGk/SVdxqWZJp98UgKZX3eXxOKo0pevJ9W4kZ6hVwdLXO+e5dkXL0mU8yIpCfpnTm6C01IN1P0E0X+5JGBWdRuegkX7E5oIKP4PpWTMPboFyZkBOBpknNviwxHqfOp6Dv2UJ9bvqbmprmheU0tPdoYWSf3Is+SXdir3Y8l9OkUCuDapoRd+BVCZDG4Bv3jxzVthnW0zJp93sXqg+cw05ZIogLwdVA5V4DEgeFOUFUsGC31vvo1s6Rqyc35alCI0pc4QAdb/O5w4nIL54DwiBMza64cYerg6POltHBPIT0v3iYQd9UpnKLQv2wH4L2NhsawGAeaio9VHTFpNKhwgS5+eGjAhG1gE37ZxvEwkhhoW+OoVQ=
+  bucket: mikeworks-libs
+  local-dir: dist
+  upload-dir: techcheck
+  acl: public_read
+  on:
+    repo: mike-works/techcheck
