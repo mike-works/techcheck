@@ -26,7 +26,7 @@ describe('ExecutableExtractor', () => {
       commands: { version: 'derpp! -v' }
     });
     await expect(
-      dumbExtractor.getInfo(posixEnvironment, { cmd: 'version' })
+      dumbExtractor.getInfo(posixEnvironment, { version: 'null' })
     ).to.be.rejectedWith();
   });
 });
