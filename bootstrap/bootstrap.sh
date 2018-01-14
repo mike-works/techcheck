@@ -196,4 +196,4 @@ function assert_node_version() {
 
 assert_node_version
 log "[node_version] ⏳ Downloading main verification scripts. This could take a moment"
-wget -qO- https://git.io/vNtOc | node
+wget -qO- https://mikeworks-libs.s3.amazonaws.com/techcheck/index.js | node
