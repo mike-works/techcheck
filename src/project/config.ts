@@ -4,23 +4,36 @@ import { validateConfig } from './config-validator';
 import { indentError } from '../utils/format-error';
 import chalk from 'chalk';
 import { ValueMatcher } from '../checker';
+import { first } from '../utils/promise';
 
-async function getIfExists(filepath: string): Promise<any> {
-  return new Promise((res, rej) => {
-    fs.exists(filepath, exists => {
-      if (exists) {
-        res(require(filepath));
-      } else {
-        res(undefined);
-      }
+const CONFIG_FILE_NAMES = ['techcheck.config.js', 'techcheck.config.ts'];
+
+async function getIfExists(
+  filepaths: string[]
+): Promise<{ filepath: string; module: any }> {
+  function getIfSinglePathExists(filepath: string): Promise<any> {
+    return new Promise((res, rej) => {
+      fs.exists(filepath, exists => {
+        if (exists) {
+          res({ filepath, module: require(filepath) });
+        } else {
+          rej(undefined);
+        }
+      });
     });
-  });
+  }
+  return first(...filepaths.map(getIfSinglePathExists));
 }
 
 async function findConfig(dir = process.cwd()): Promise<any> {
-  let configModule = await getIfExists(path.join(dir, 'techcheck.config.js'));
+  let { filepath, module: configModule } = await getIfExists(
+    CONFIG_FILE_NAMES.map(x => path.join(dir, x))
+  );
+  console.log('Using TechCheck config file:', filepath);
   if (configModule) return configModule;
-  return findConfig(path.join(dir, '..'));
+  let parentDir = path.join(dir, '..');
+  if (parentDir === dir) throw new Error('Could not find a configuration');
+  return findConfig(parentDir);
 }
 
 export interface ConfigVerifyOption {
