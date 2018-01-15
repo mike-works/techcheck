@@ -6,7 +6,13 @@ elif [ "$TEST_SUITE" == "LINT" ]; then
 elif [ "$TEST_SUITE" == "UNIT" ]; then
   node_modules/.bin/mocha -o test/mocha.opts
 elif [ "$TEST_SUITE" == "ACCEPTANCE" ]; then
-  node dist/index.js
+  source ~/.nvm/nvm.sh
+  nvm install stable
+  nvm use stable
+  npm install
+  npm run build
+  nvm use $TRAVIS_NODE_VERSION
+  node dist/index.js || echo "done"
 else
   echo "no TEST_SUITE defined"
   exit 1

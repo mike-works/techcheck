@@ -11,20 +11,22 @@ describe('ExecutableExtractor', () => {
     let nodeExtractor = new ExecutableExtractor({
       name: 'node',
       platforms: [Platform.Win32, Platform.Posix],
-      command: 'node -v'
+      commands: { version: 'node -v' }
     });
-    let info = BaseExtractor.unbrand(
-      await nodeExtractor.getInfo(posixEnvironment)
-    );
-    expect(info).to.equal(`v${process.versions.node}`);
+    let info = await nodeExtractor.getInfo(posixEnvironment, {
+      version: { semver: { min: '0.0.0' } }
+    });
+    expect(info.normalized).to.equal(`v${process.versions.node}`);
   });
 
   it('should throw if command does not exist', async () => {
     let dumbExtractor = new ExecutableExtractor({
       name: 'dumb',
       platforms: [Platform.Win32, Platform.Posix],
-      command: 'derpp! -v'
+      commands: { version: 'derpp! -v' }
     });
-    await expect(dumbExtractor.getInfo(posixEnvironment)).to.be.rejectedWith();
+    await expect(
+      dumbExtractor.getInfo(posixEnvironment, { version: 'null' })
+    ).to.be.rejectedWith();
   });
 });

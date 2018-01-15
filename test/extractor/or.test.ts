@@ -11,7 +11,10 @@ describe('OrExtractor', () => {
     let git = new ExecutableExtractor({
       name: 'git',
       platforms: [Platform.Win32],
-      command: 'git --version'
+      commands: { version: 'git --version' },
+      normalizerOptions: {
+        preprocessor: /[0-9\.]+/
+      }
     });
     let comboExtractor = new OrExtractor({
       extractors: [
@@ -19,19 +22,24 @@ describe('OrExtractor', () => {
         new ExecutableExtractor({
           name: 'node',
           platforms: [Platform.Posix],
-          command: 'node -v'
+          commands: { version: 'node -v' }
         })
       ]
     });
     let info = {
-      posix: BaseExtractor.unbrand(
-        await comboExtractor.getInfo(posixEnvironment)
-      ),
-      win: BaseExtractor.unbrand(await comboExtractor.getInfo(winEnvironment))
+      posix: (await comboExtractor.getInfo(posixEnvironment, {
+        version: { semver: { min: '0.0.0' } }
+      })).normalized,
+      win: (await comboExtractor.getInfo(winEnvironment, {
+        version: { semver: { min: '0.0.0' } }
+      })).normalized
     };
     expect(info.posix).to.equal(`v${process.versions.node}`);
+
     expect(info.win).to.equal(
-      BaseExtractor.unbrand(await git.getInfo(winEnvironment))
+      (await git.getInfo(winEnvironment, {
+        version: { semver: { min: '0.0.0' } }
+      })).normalized
     );
   });
 
@@ -39,7 +47,7 @@ describe('OrExtractor', () => {
     let git = new ExecutableExtractor({
       name: 'git',
       platforms: [Platform.Win32],
-      command: 'git --version'
+      commands: { version: 'git --version' }
     });
     expect(
       () =>
@@ -49,7 +57,7 @@ describe('OrExtractor', () => {
             new ExecutableExtractor({
               name: 'node',
               platforms: [Platform.Win32],
-              command: 'node -v'
+              commands: { version: 'node -v' }
             })
           ]
         })

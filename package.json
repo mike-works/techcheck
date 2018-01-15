@@ -1,6 +1,6 @@
 {
   "name": "techcheck",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "Project Setup & Dependency Verification Tools",
   "main": "dist/index.js",
   "repository": {
@@ -11,12 +11,15 @@
     "build": "scripty",
     "build:ts": "scripty",
     "build:prod": "scripty",
+    "build:watch": "scripty",
+    "build:prod:watch": "scripty",
     "lint:ts": "tslint -p tsconfig.json",
+    "start": "./node_modules/.bin/ts-node src/index.ts",
     "watch": "scripty",
-    "watch:ts": "scripty",
     "test": "scripty",
     "test:ci": "scripty",
-    "test:watch": "scripty"
+    "test:watch": "scripty",
+    "prepare-release": "scripty"
   },
   "engines": {
     "node": ">= 0.10"
@@ -27,6 +30,7 @@
   "author": "Mike North <michael.l.north@gmail.com> (https://mike.works)",
   "license": "GPL-3.0",
   "dependencies": {
+    "chalk": "^1.1.3",
     "es6-promise": "^4.2.2",
     "semver": "^5.4.1"
   },
@@ -34,21 +38,25 @@
     "@babel/core": "^7.0.0-beta.37",
     "@types/chai": "^4.0.10",
     "@types/chai-as-promised": "^7.1.0",
+    "@types/lodash.assign": "^4.2.3",
+    "@types/lodash.difference": "^4.5.3",
     "@types/mocha": "^2.2.45",
     "@types/node": "^9.3.0",
     "@types/semver": "^5.4.0",
     "chai": "^4.1.2",
     "chai-as-promised": "^7.1.1",
+    "concurrently": "^3.5.1",
     "lodash.camelcase": "^4.3.0",
     "mocha": "^4.0.1",
     "mocha-typescript": "^1.1.12",
-    "nodemon": "^1.14.3",
+    "nodemon": "^1.14.11",
     "rollup": "^0.54.0",
     "rollup-plugin-commonjs": "^8.2.6",
+    "rollup-plugin-hash": "^1.3.0",
     "rollup-plugin-node-builtins": "^2.1.2",
     "rollup-plugin-node-resolve": "^3.0.0",
     "rollup-plugin-sourcemaps": "^0.4.2",
-    "rollup-plugin-typescript2": "^0.9.0",
+    "rollup-plugin-typescript2": "^0.10.0",
     "rollup-plugin-uglify": "^2.0.1",
     "scripty": "^1.7.2",
     "source-map-support": "^0.5.0",

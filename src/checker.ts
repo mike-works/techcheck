@@ -1,8 +1,8 @@
-import * as semver from 'semver';
-import { ExtractorValue, BaseExtractor } from './extractor/base';
+import { validRange, satisfies, gte, lte } from 'semver';
 
-export type ValueFormatter = RegExp | ((raw: string) => string);
-export type SemVerMatcher = { range?: string; min?: string; max?: string };
+export type SemVerMatcher =
+  | { range?: string; min?: string; max?: string }
+  | string;
 
 export type ValueMatcher =
   | RegExp
@@ -10,44 +10,32 @@ export type ValueMatcher =
   | { semver: SemVerMatcher }
   | ((raw: string) => boolean);
 
-export interface BaseCheckerOptions {
-  preprocessor?: ValueFormatter;
-  matcher: ValueMatcher;
-  name: string;
-}
-
-function normalizeExtractorValue(
-  v: ExtractorValue,
-  adj: ValueFormatter
-): string {
-  if (adj instanceof RegExp) {
-    let parts = adj.exec(BaseExtractor.unbrand(v));
-    if (parts === null || parts.length === 0)
-      throw new Error(`Could not normalize value ${v} with ${adj}`);
-    return parts[0];
-  }
-  return adj(BaseExtractor.unbrand(v));
-}
-
 function doesSemverMatch(version: string, m: SemVerMatcher): boolean {
-  let { range, min, max } = m;
+  let range = typeof m !== 'string' ? m.range : m;
+  let min: string | undefined;
+  let max: string | undefined;
+  if (typeof m !== 'string') {
+    min = m.min;
+    max = m.max;
+  }
+
   if (typeof range !== 'undefined') {
-    return semver.satisfies(version, range);
+    return satisfies(version, range);
   }
   if (typeof max !== 'undefined') {
     if (typeof min !== 'undefined') {
-      return semver.gte(version, min) && semver.lte(version, max);
+      return gte(version, min) && lte(version, max);
     }
-    return semver.lte(version, max);
+    return lte(version, max);
   }
   if (typeof min !== 'undefined') {
-    return semver.gte(version, min);
+    return gte(version, min);
   }
   throw new Error(`Invalid SemVerMatcher object ${JSON.stringify(m)}`);
 }
 
-function doesMatch(v: ExtractorValue | string, m: ValueMatcher): boolean {
-  let val = typeof v === 'string' ? v : BaseExtractor.unbrand(v);
+function doesMatch(v: string | string, m: ValueMatcher): boolean {
+  let val = v;
   if (m instanceof RegExp) {
     return m.test(val);
   }
@@ -60,36 +48,31 @@ function doesMatch(v: ExtractorValue | string, m: ValueMatcher): boolean {
   return doesSemverMatch(val, m.semver);
 }
 
-function validateOptions(opts: BaseCheckerOptions) {
+function validateMatcher(matcher: ValueMatcher) {
+  if (matcher instanceof RegExp) return true;
+  if (matcher instanceof Function) return true;
+  if (typeof matcher === 'string') return true;
   if (
-    !(opts.matcher instanceof RegExp) &&
-    !(opts.matcher instanceof Function) &&
-    typeof opts.matcher !== 'string'
-  ) {
-    opts.matcher.semver;
-  }
+    typeof matcher.semver !== 'undefined' &&
+    ((typeof matcher.semver === 'string' &&
+      validRange(matcher.semver) !== undefined) ||
+      (typeof matcher.semver !== 'string' &&
+        (typeof matcher.semver.max !== 'undefined' ||
+          typeof matcher.semver.min !== 'undefined' ||
+          typeof matcher.semver.range !== 'undefined')))
+  )
+    return true;
+  return false;
 }
 
-export class BaseChecker {
-  protected preprocessor?: ValueFormatter;
-  protected matcher?: ValueMatcher;
-  public readonly name: string;
-  constructor(opts: BaseCheckerOptions) {
-    validateOptions(opts);
-    this.preprocessor = opts.preprocessor;
-    this.matcher = opts.matcher;
-    this.name = opts.name;
-  }
-  public async isOk(v: ExtractorValue): Promise<boolean> {
-    let normalized =
-      typeof this.preprocessor !== 'undefined'
-        ? normalizeExtractorValue(v, this.preprocessor)
-        : v;
-    if (typeof this.matcher === 'undefined')
-      throw new Error(`Checker ${this.name} does not have a matcher`);
-    let matches = doesMatch(normalized, this.matcher);
+export function isOk(v: string, matcher: ValueMatcher): boolean {
+  try {
+    if (typeof matcher === 'undefined' || !validateMatcher(matcher))
+      throw new Error(`Invalid matcher: ${JSON.stringify(matcher)}`);
+    let matches = doesMatch(v, matcher);
     return matches;
+  } catch (e) {
+    console.warn(`Problem evaluating version ${v} to match ${matcher}\n${e}`);
+    return false;
   }
 }
-
-export default BaseChecker;

@@ -16,15 +16,15 @@ class TestExtractor extends BaseExtractor {
 describe('BaseExtractor', () => {
   it('should throw if run on a platform it does not support', async () => {
     let ex = new TestExtractor({ name: 'test', platforms: [Platform.Win32] });
-    await expect(ex.getInfo(posixEnvironment)).to.be.rejectedWith(
+    await expect(ex.getInfo(posixEnvironment, {})).to.be.rejectedWith(
       'does not support'
     );
   });
 
   it('should operate without throwing on platforms it does support', async () => {
     let ex = new TestExtractor({ name: 'test', platforms: [Platform.Posix] });
-    let info = BaseExtractor.unbrand(await ex.getInfo(posixEnvironment));
-    expect(info).to.equal('infooo');
+    let info = await ex.getInfo(posixEnvironment, 'infooo');
+    expect(info.normalized).to.equal('infooo');
   });
 
   it('should properly indicate which platforms it handles', async () => {
