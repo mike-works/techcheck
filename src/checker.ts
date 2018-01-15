@@ -72,7 +72,7 @@ export function isOk(v: string, matcher: ValueMatcher): boolean {
     let matches = doesMatch(v, matcher);
     return matches;
   } catch (e) {
-    console.warn(e);
+    console.warn(`Problem evaluating version ${v} to match ${matcher}\n${e}`);
     return false;
   }
 }

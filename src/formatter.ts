@@ -2,26 +2,35 @@ import * as _chalk from 'chalk';
 import { ExtractorResult } from './extractor/base';
 import { EvaluatorResult, EvaluatorStatus } from './evaluator';
 import { ValueMatcher } from './checker';
+import { rightPad } from './utils/string';
 const chalk = _chalk.default || _chalk;
 
+function formatName(name: string) {
+  return rightPad(name, 15, ' ');
+}
+
+function formatMessage(message: string) {
+  return rightPad(message, 24, ' ');
+}
+
 function successMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
-  let str = `  ✅  ${r.name}\t${r.message}`;
-  str += chalk.grey(`\t(required: ${formatMatcher(r.target)} )`);
+  let str = `  ✅  ${formatName(r.name)}${formatMessage(r.message)}`;
+  str += chalk.grey(`(required: ${formatMatcher(r.target)} )`);
   s.write(str + '\n');
 }
 
 function failMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
-  let str = `  🛑  ${r.name}\t${r.message}`;
-  str += chalk.grey(`\t(required: ${formatMatcher(r.target)} )`);
+  let str = `  🛑  ${formatName(r.name)}${formatMessage(r.message)}`;
+  str += chalk.grey(`(required: ${formatMatcher(r.target)} )`);
   s.write(str + '\n');
 }
 
 function warnMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
-  s.write(`  ⚠️  ${r.name}\n`);
+  s.write(`  ⚠️  ${formatName(r.name)}\n`);
 }
 
 function errorMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
-  s.write(`  💥  ${r.name}\n`);
+  s.write(`  💥  ${formatName(r.name)}\n`);
 }
 
 export function formatExtractorResults(

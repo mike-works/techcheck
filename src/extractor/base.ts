@@ -28,12 +28,14 @@ export interface BaseExtractorOptions {
   normalizerOptions?: NormalizerOptions;
 }
 
-function normalizeValue(s: string, vf?: ValueFormatter): string {
+function normalizeValue(s: string, no?: NormalizerOptions): string {
+  if (!no) return s;
+  let vf = no.preprocessor;
   if (typeof vf === 'undefined') return s;
   if (vf instanceof RegExp) {
     let parts = vf.exec(s);
     if (parts && parts.length > 0) {
-      return parts[0];
+      return parts[1] || parts[0];
     }
     return '';
   }
@@ -68,10 +70,7 @@ export abstract class BaseExtractor {
 
     let ev = await this.getInfoForEnvironment(env, cmd, opts);
     let raw = BaseExtractor.unbrand(ev);
-    let normalized = normalizeValue(
-      raw,
-      this.normalizerOptions ? this.normalizerOptions.preprocessor : undefined
-    );
+    let normalized = normalizeValue(raw, this.normalizerOptions || undefined);
     let matcher: ValueMatcher = cmd ? (opts as any)[cmd] : opts;
     return {
       raw,

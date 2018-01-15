@@ -42,6 +42,42 @@ const RUBY_EXTRACTOR = new ExecutableExtractor({
   }
 });
 
+const GEM_EXTRACTOR = new ExecutableExtractor({
+  name: 'Gem',
+  platforms: [Platform.Win32, Platform.Posix],
+  commands: { version: 'gem -v' },
+  normalizerOptions: {
+    preprocessor: /[0-9\.]+/
+  }
+});
+
+const GIT_EXTRACTOR = new ExecutableExtractor({
+  name: 'Git',
+  platforms: [Platform.Win32, Platform.Posix],
+  commands: { version: 'git --version' },
+  normalizerOptions: {
+    preprocessor: /[0-9\.]+/
+  }
+});
+
+const EMBER_CLI_EXTRACTOR = new ExecutableExtractor({
+  name: 'Ember-CLI',
+  platforms: [Platform.Win32, Platform.Posix],
+  commands: { version: 'ember -v' },
+  normalizerOptions: {
+    preprocessor: /ember-cli:\s([0-9\.]+)\n/
+  }
+});
+
+const TRAVIS_CI_GEM_EXTRACTOR = new ExecutableExtractor({
+  name: 'Travis-CI Gem',
+  platforms: [Platform.Win32, Platform.Posix],
+  commands: { version: 'travis -v' },
+  normalizerOptions: {
+    preprocessor: /[0-9\.]+/
+  }
+});
+
 export class ExtractorRegistry {
   protected extractors: { [k: string]: ExtractorInfo };
   constructor() {
@@ -66,7 +102,11 @@ export class ExtractorRegistry {
     this.extractors.openssl = OPENSSL_EXTRACTOR;
     this.extractors.node = NODE_EXTRACTOR;
     this.extractors.postgres = POSTGRES_EXTRACTOR;
-    this.extractors.postgres = RUBY_EXTRACTOR;
+    this.extractors.ruby = RUBY_EXTRACTOR;
+    this.extractors.gem = GEM_EXTRACTOR;
+    this.extractors.git = GIT_EXTRACTOR;
+    this.extractors['ember-cli'] = EMBER_CLI_EXTRACTOR;
+    this.extractors.travis = TRAVIS_CI_GEM_EXTRACTOR;
   }
 
   public getExtractor(name: string): BaseExtractor | null {
