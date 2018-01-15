@@ -33,6 +33,15 @@ const POSTGRES_EXTRACTOR = new ExecutableExtractor({
   }
 });
 
+const RUBY_EXTRACTOR = new ExecutableExtractor({
+  name: 'Ruby',
+  platforms: [Platform.Win32, Platform.Posix],
+  commands: { version: 'ruby -v' },
+  normalizerOptions: {
+    preprocessor: /[0-9\.]+/
+  }
+});
+
 export class ExtractorRegistry {
   protected extractors: { [k: string]: ExtractorInfo };
   constructor() {
@@ -57,6 +66,7 @@ export class ExtractorRegistry {
     this.extractors.openssl = OPENSSL_EXTRACTOR;
     this.extractors.node = NODE_EXTRACTOR;
     this.extractors.postgres = POSTGRES_EXTRACTOR;
+    this.extractors.postgres = RUBY_EXTRACTOR;
   }
 
   public getExtractor(name: string): BaseExtractor | null {

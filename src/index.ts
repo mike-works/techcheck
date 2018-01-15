@@ -1,11 +1,12 @@
 import Evaluator, { EvaluatorStatus } from './evaluator';
 import 'es6-promise/auto';
-import chalk from 'chalk';
+import * as _chalk from 'chalk';
 import { ProjectConfig } from './project/config';
 import { indentError } from './utils/format-error';
 import { ExtractorRegistry } from './extractor/registry';
 import Environment from './environment';
 import { formatExtractorResults } from './formatter';
+const chalk = _chalk.default || _chalk;
 
 async function coreSetup(): Promise<{ registry: ExtractorRegistry }> {
   let registry = new ExtractorRegistry();

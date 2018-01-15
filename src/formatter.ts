@@ -1,7 +1,8 @@
-import chalk from 'chalk';
+import * as _chalk from 'chalk';
 import { ExtractorResult } from './extractor/base';
 import { EvaluatorResult, EvaluatorStatus } from './evaluator';
 import { ValueMatcher } from './checker';
+const chalk = _chalk.default || _chalk;
 
 function successMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
   let str = `  ✅  ${r.name}\t${r.message}`;
