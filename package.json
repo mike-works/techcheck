@@ -19,7 +19,9 @@
     "test": "scripty",
     "test:ci": "scripty",
     "test:watch": "scripty",
-    "prepare-release": "scripty"
+    "prepare-release": "scripty",
+    "travis-deploy-once": "travis-deploy-once",
+    "semantic-release": "semantic-release"
   },
   "engines": {
     "node": ">= 0.10"
@@ -35,10 +37,10 @@
     "semver": "^5.4.1"
   },
   "devDependencies": {
+    "@babel/core": "^7.0.0-beta.37",
     "@commitlint/cli": "7.2.1",
     "@commitlint/config-conventional": "7.1.2",
     "@commitlint/travis-cli": "7.2.1",
-    "@babel/core": "^7.0.0-beta.37",
     "@mike-north/js-lib-semantic-release-config": "^0.0.0-development",
     "@types/chai": "^4.0.10",
     "@types/chai-as-promised": "^7.1.0",
@@ -64,7 +66,9 @@
     "rollup-plugin-typescript2": "^0.10.0",
     "rollup-plugin-uglify": "^2.0.1",
     "scripty": "^1.7.2",
+    "semantic-release": "^15.10.8",
     "source-map-support": "^0.5.0",
+    "travis-deploy-once": "^5.0.9",
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "tslint-config-airbnb": "^5.4.2",
