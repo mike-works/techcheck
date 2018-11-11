@@ -1,10 +1,10 @@
 echo "TEST_SUITE=$TEST_SUITE"
 if [ "$TEST_SUITE" == "SHELL" ]; then
-  test/posix.sh && yarn travis-deploy-once "yarn semantic-release"
+  test/posix.sh && npm run travis-deploy-once "npm run semantic-release"
 elif [ "$TEST_SUITE" == "LINT" ]; then
-  npm run lint:ts && yarn travis-deploy-once "yarn semantic-release"
+  npm run lint:ts && npm run travis-deploy-once "npm run semantic-release"
 elif [ "$TEST_SUITE" == "UNIT" ]; then
-  node_modules/.bin/mocha -o test/mocha.opts && yarn travis-deploy-once "yarn semantic-release"
+  node_modules/.bin/mocha -o test/mocha.opts && npm run travis-deploy-once "npm run semantic-release"
 elif [ "$TEST_SUITE" == "ACCEPTANCE" ]; then
   source ~/.nvm/nvm.sh
   nvm install stable
@@ -12,7 +12,7 @@ elif [ "$TEST_SUITE" == "ACCEPTANCE" ]; then
   npm install
   npm run build
   nvm use $TRAVIS_NODE_VERSION
-  node dist/index.js || echo "done"  && yarn travis-deploy-once "yarn semantic-release"
+  node dist/index.js || echo "done"  && npm run travis-deploy-once "npm run semantic-release"
 else
   echo "no TEST_SUITE defined"
   exit 1
