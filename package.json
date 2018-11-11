@@ -69,9 +69,7 @@
     "ts-node": "^4.1.0",
     "tslint": "^5.8.0",
     "tslint-config-airbnb": "^5.4.2",
-    "typescript": "^2.6.2"
-  },
-  "optionalDependencies": {
+    "typescript": "^2.6.2",
     "@mike-north/js-lib-renovate-config": "^1.0.0",
     "@mike-north/js-lib-semantic-release-config": "^0.0.0-development",
     "semantic-release": "^15.10.8",
