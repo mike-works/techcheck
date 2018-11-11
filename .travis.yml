@@ -39,7 +39,7 @@ jobs:
 
 install:
   - rm -rf ~/.nvm && git clone https://github.com/creationix/nvm.git ~/.nvm && (cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`) && source ~/.nvm/nvm.sh && nvm install $TRAVIS_NODE_VERSION
-  - nvm use $TRAVIS_NODE_VERSION
+  - nvm use --delete-prefix $TRAVIS_NODE_VERSION
   - './scripts-ci/posix-install.sh'
 after_install:
   - npm install -g mocha-typescript
