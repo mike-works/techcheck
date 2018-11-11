@@ -3,20 +3,17 @@ language: node_js
 jobs:
   fail_fast: true
   include:
-    - stage: lint
-      name: 'Linting'
+    - stage: 'Linting'
       node_js: stable
       env: TEST_SUITE=LINT
 
-    - stage: old-node
-      name: 'Old node versions'
+    - stage: 'Old node versions'
       node_js: '0.10'
       env: TEST_SUITE=SHELL
     - node_js: '0.10'
       env: TEST_SUITE=ACCEPTANCE
 
-    - stage: less-old-nodes
-      name: 'Slightly less old node versions'
+    - stage: 'Slightly less old node versions'
       node_js: '4'
       env: TEST_SUITE=SHELL
     - node_js: '6'
@@ -26,16 +23,14 @@ jobs:
     - node_js: '4'
       env: TEST_SUITE=ACCEPTANCE
 
-    - stage: lts-old-nodes
-      name: 'LTS node versions'
+    - stage: 'LTS node versions'
       node_js: '8'
       env: TEST_SUITE=SHELL
     - node_js: '8'
       env: TEST_SUITE=ACCEPTANCE
 
-    - stage: modern-nodes
-      name: 'Modern node versions'
-    - node_js: stable
+    - stage: 'Modern node versions'
+      node_js: stable
       env: DEPLOY_ON_SUCCESS=true TEST_SUITE=ACCEPTANCE
     - node_js: stable
       env: TEST_SUITE=SHELL
