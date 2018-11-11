@@ -46,10 +46,11 @@ export class Evaluator {
         i++;
         let { name } = v;
         let ex = this.registry.getExtractor(name);
-        if (ex === null)
+        if (ex === null) {
           throw new Error(
             `Found item in "root.verify[${i}]" pertaining to unknown extractor: ${name}`
           );
+        }
         let extractorResult: ExtractorResult;
         try {
           extractorResult = await ex.getInfo(this.env, v);

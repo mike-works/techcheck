@@ -8,8 +8,9 @@ interface TypeErrorMessage {
 }
 
 function validateVerifyItem(dep: any, i: number): TypeErrorMessage[] {
-  if (typeof dep.name !== 'string')
+  if (typeof dep.name !== 'string') {
     return [{ path: `root.verify[${i}].name`, message: 'should be a string' }];
+  }
   if (dep.version instanceof RegExp) return [];
   if (dep.version instanceof Function) return [];
   if (typeof dep.version === 'string') return [];
@@ -34,8 +35,9 @@ function validateVerifyItem(dep: any, i: number): TypeErrorMessage[] {
       (dep.version.semver.min ||
         dep.version.semver.max ||
         dep.version.semver.range)
-    )
+    ) {
       return [];
+    }
     return [
       {
         path: `root.verify[${i}].version`,

@@ -16,13 +16,13 @@ function formatMessage(message: string) {
 function successMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
   let str = `  ✅  ${formatName(r.name)}${formatMessage(r.message)}`;
   str += chalk.grey(`(required: ${formatMatcher(r.target)} )`);
-  s.write(str + '\n');
+  s.write(`${str}\n`);
 }
 
 function failMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
   let str = `  🛑  ${formatName(r.name)}${formatMessage(r.message)}`;
   str += chalk.grey(`(required: ${formatMatcher(r.target)} )`);
-  s.write(str + '\n');
+  s.write(`${str}\n`);
 }
 
 function warnMessage(s: NodeJS.WritableStream, r: EvaluatorResult) {
@@ -37,11 +37,9 @@ export function formatExtractorResults(
   s: NodeJS.WritableStream,
   results: EvaluatorResult[]
 ) {
-  s.write(
-    '\n' +
-      chalk.yellow("🔍 TechCheck Scan: Making sure you're all set up 🔎") +
-      '\n'
-  );
+  s.write(`
+${chalk.yellow("🔍 TechCheck Scan: Making sure you're all set up 🔎")}
+`);
   s.write(' ------------------------------------------------\n');
   results.forEach(r => {
     if (r.status === EvaluatorStatus.Ok) successMessage(s, r);
@@ -53,10 +51,10 @@ export function formatExtractorResults(
 
 function formatMatcher(valueMatcher: ValueMatcher) {
   if (typeof valueMatcher === 'string') {
-    return '= ' + chalk.yellow(`"${valueMatcher}"`);
+    return `= ${chalk.yellow(`"${valueMatcher}"`)}`;
   }
   if (valueMatcher instanceof RegExp) {
-    return '~ ' + chalk.magenta(`/${valueMatcher.source}/`);
+    return +`~ ${chalk.magenta(`/${valueMatcher.source}/`)}`;
   }
   if (valueMatcher instanceof Function) {
     return chalk.cyan(`${valueMatcher.toString()}`);

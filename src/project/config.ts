@@ -48,10 +48,11 @@ export interface ConfigOptions {
 export class ProjectConfig {
   private optionsModule?: ConfigOptions;
   public get options(): Readonly<ConfigOptions> {
-    if (!this.optionsModule)
+    if (!this.optionsModule) {
       throw new Error(
         `Attempted to access project config options before it was populated`
       );
+    }
     return this.optionsModule;
   }
   public async setup() {

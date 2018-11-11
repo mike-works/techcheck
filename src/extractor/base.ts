@@ -51,10 +51,11 @@ export abstract class BaseExtractor {
     return (this.platforms as Platform[]).indexOf(platform) >= 0;
   }
   public async getInfo(env: Environment, opts: any): Promise<ExtractorResult> {
-    if (!this.handlesPlatform(env.platform))
+    if (!this.handlesPlatform(env.platform)) {
       throw new Error(
         `Extractor ${this.name} does not support ${Platform[env.platform]}`
       );
+    }
     let cmd = Object.keys(opts).reduce(
       (acc, item) => {
         if (item === 'name') return acc;
@@ -63,10 +64,11 @@ export abstract class BaseExtractor {
       },
       [] as string[]
     )[0];
-    if (!cmd)
+    if (!cmd) {
       throw new Error(
         `Extractor ${this.name} didn't know which command to execute`
       );
+    }
 
     let ev = await this.getInfoForEnvironment(env, cmd, opts);
     let raw = BaseExtractor.unbrand(ev);

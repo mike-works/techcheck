@@ -60,15 +60,17 @@ function validateMatcher(matcher: ValueMatcher) {
         (typeof matcher.semver.max !== 'undefined' ||
           typeof matcher.semver.min !== 'undefined' ||
           typeof matcher.semver.range !== 'undefined')))
-  )
+  ) {
     return true;
+  }
   return false;
 }
 
 export function isOk(v: string, matcher: ValueMatcher): boolean {
   try {
-    if (typeof matcher === 'undefined' || !validateMatcher(matcher))
+    if (typeof matcher === 'undefined' || !validateMatcher(matcher)) {
       throw new Error(`Invalid matcher: ${JSON.stringify(matcher)}`);
+    }
     let matches = doesMatch(v, matcher);
     return matches;
   } catch (e) {

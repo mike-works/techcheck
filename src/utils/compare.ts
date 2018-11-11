@@ -28,8 +28,9 @@ function checkObjectKeysImpl(
   if (!optional) return errors;
   for (let j = 0; j < objKeys.length; j++) {
     if (checked[objKeys[j]]) continue;
-    if ((optional as string[]).indexOf(objKeys[j]) < 0)
+    if ((optional as string[]).indexOf(objKeys[j]) < 0) {
       errors.push(`Unknown key: "${objKeys[j]}"`);
+    }
   }
   return true;
 }
