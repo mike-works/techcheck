@@ -4,7 +4,7 @@ if [ "$TEST_SUITE" == "SHELL" ]; then
 elif [ "$TEST_SUITE" == "LINT" ]; then
   npm run lint:ts
 elif [ "$TEST_SUITE" == "UNIT" ]; then
-  nvm exec $TRAVIS_NODE_VERSION node_modules/.bin/mocha -o test/mocha.opts && ./node_modules/.bin/travis-deploy-once -b 11 "./node_modules/.bin/semantic-release"
+  node_modules/.bin/mocha -o test/mocha.opts && ./node_modules/.bin/travis-deploy-once -b 11 "./node_modules/.bin/semantic-release"
 elif [ "$TEST_SUITE" == "ACCEPTANCE" ]; then
   source ~/.nvm/nvm.sh
   nvm install stable

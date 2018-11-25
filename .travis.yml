@@ -16,16 +16,18 @@ jobs:
     - stage: 'Slightly less old node versions'
       node_js: '4'
       env: TEST_SUITE=SHELL
+    - node_js: '4'
+      env: TEST_SUITE=ACCEPTANCE
     - node_js: '6'
       env: TEST_SUITE=SHELL
-    - node_js: '4'
-      env: TEST_SUITE=UNIT
-    - node_js: '4'
+    - node_js: '6'
       env: TEST_SUITE=ACCEPTANCE
 
     - stage: 'LTS node versions'
       node_js: '8'
       env: TEST_SUITE=SHELL
+    - node_js: '8'
+      env: TEST_SUITE=UNIT
     - node_js: '8'
       env: TEST_SUITE=ACCEPTANCE
 
