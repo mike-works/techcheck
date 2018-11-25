@@ -30,6 +30,12 @@ jobs:
       env: TEST_SUITE=UNIT
     - node_js: '8'
       env: TEST_SUITE=ACCEPTANCE
+    - node_js: '10'
+      env: TEST_SUITE=SHELL
+    - node_js: '10'
+      env: TEST_SUITE=UNIT
+    - node_js: '10'
+      env: TEST_SUITE=ACCEPTANCE
 
     - stage: 'Modern node versions'
       node_js: stable
