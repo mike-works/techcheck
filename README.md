@@ -11,10 +11,6 @@
   <a href="https://ci.appveyor.com/project/mike-north/techcheck" title="Build Status">
     <img title="Build Status" src="https://ci.appveyor.com/api/projects/status/13gtmp1ha2dvjfyp?svg=true"/>
   </a>
-
-  <a title='GreenKeeper'>
-    <img title='GreenKeeper' src='https://badges.greenkeeper.io/mike-works/techcheck.svg'>
-  </a>
 </p>
 <p align='center'>
 <b>TechCheck</b> is a utility that we use for <a title="Mike.Works" href="https://mike.works">Mike.Works</a> <a href='https://mike.works/courses'>software engineering training</a> to run pre-flight checks, ensuring attendees are set up with the right versions of the right software.
