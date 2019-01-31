@@ -777,16 +777,18 @@
   resolved "https://registry.yarnpkg.com/@mike-north/js-lib-renovate-config/-/js-lib-renovate-config-1.0.0.tgz#e00a7264de0767049d3a75c29e36db69b0ac81cf"
   integrity sha512-ixKtfThE8RFJDAFXrypSYPEkPzXB8yTaRjillj5/T5JcF4+pWfrDKhOUb2tytnJLBgNzUjohWwIdxy6yFbWRbQ==
 
-"@mike-north/js-lib-semantic-release-config@0.0.0-development":
-  version "0.0.0-development"
-  resolved "https://registry.yarnpkg.com/@mike-north/js-lib-semantic-release-config/-/js-lib-semantic-release-config-0.0.0-development.tgz#b3c0f8972036c74dea94208a7f57b5d3a2f7dc1b"
-  integrity sha512-dXMVK3duEXXb8guYfzcZ2D2Rs1/dFbbak5H5DJwcsDqQqlpjinb9wNJNNByOlz9eEUi48fenbO5TQFDn+9ioOg==
+"@mike-north/js-lib-semantic-release-config@1.0.1":
+  version "1.0.1"
+  resolved "https://registry.yarnpkg.com/@mike-north/js-lib-semantic-release-config/-/js-lib-semantic-release-config-1.0.1.tgz#39a42e84deeebe77c73aff69879582d1418c0505"
+  integrity sha512-vTsYu0l8yTlRrVqWtSOI0MD8oa2MDc+RCW8FKCa+WDPvRGrcbnukva7Ohw81L1RFxEx+7A6I5zKBm7/U6HMXag==
   dependencies:
     "@semantic-release/changelog" "^3.0.0"
     "@semantic-release/error" "^2.2.0"
     "@semantic-release/exec" "^3.0.2"
-    "@semantic-release/git" "^7.0.1"
+    "@semantic-release/git" "^7.0.5"
     "@semantic-release/github" "^5.0.2"
+    semantic-release "^15.9.9"
+    travis-deploy-once "^5.0.9"
 
 "@mrmlnc/readdir-enhanced@^2.2.1":
   version "2.2.1"
@@ -876,7 +878,7 @@
     lodash "^4.17.4"
     parse-json "^4.0.0"
 
-"@semantic-release/git@^7.0.1":
+"@semantic-release/git@^7.0.5":
   version "7.0.5"
   resolved "https://registry.yarnpkg.com/@semantic-release/git/-/git-7.0.5.tgz#640e66683dbbb0a0771e9968e2dc15ec5facaf38"
   integrity sha512-90TDMAQw9S5BXjygpEb8zdwLCnUmP5G2GfKHUvmFapFNh3UsI1AJljEUe5hJh/GOuHiyBD/whnCMYExsp8a34Q==
@@ -6337,6 +6339,38 @@ scripty@^1.7.2:
     resolve-pkg "^1.0.0"
 
 semantic-release@^15.10.8:
+  version "15.12.4"
+  resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.12.4.tgz#d0f4c3649d01e2e29a9df5e4886bab869d75ef02"
+  integrity sha512-po30Te9E26v3Qb/G9pXFO6lCTFO07zvliqH00vmfuCoAjl1Wpg9SKb9dXVFM7BTdg5Fr/KqbdOsqHkT7kR4FeQ==
+  dependencies:
+    "@semantic-release/commit-analyzer" "^6.1.0"
+    "@semantic-release/error" "^2.2.0"
+    "@semantic-release/github" "^5.1.0"
+    "@semantic-release/npm" "^5.0.5"
+    "@semantic-release/release-notes-generator" "^7.1.2"
+    aggregate-error "^1.0.0"
+    cosmiconfig "^5.0.1"
+    debug "^4.0.0"
+    env-ci "^3.0.0"
+    execa "^1.0.0"
+    figures "^2.0.0"
+    find-versions "^3.0.0"
+    get-stream "^4.0.0"
+    git-log-parser "^1.2.0"
+    hook-std "^1.1.0"
+    hosted-git-info "^2.7.1"
+    lodash "^4.17.4"
+    marked "^0.5.0"
+    marked-terminal "^3.0.0"
+    p-locate "^3.0.0"
+    p-reduce "^1.0.0"
+    read-pkg-up "^4.0.0"
+    resolve-from "^4.0.0"
+    semver "^5.4.1"
+    signale "^1.2.1"
+    yargs "^12.0.0"
+
+semantic-release@^15.9.9:
   version "15.12.4"
   resolved "https://registry.yarnpkg.com/semantic-release/-/semantic-release-15.12.4.tgz#d0f4c3649d01e2e29a9df5e4886bab869d75ef02"
   integrity sha512-po30Te9E26v3Qb/G9pXFO6lCTFO07zvliqH00vmfuCoAjl1Wpg9SKb9dXVFM7BTdg5Fr/KqbdOsqHkT7kR4FeQ==
