@@ -37,7 +37,7 @@
     "semver": "^5.4.1"
   },
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.37",
+    "@babel/core": "^7.2.0",
     "@commitlint/cli": "7.5.0",
     "@commitlint/config-conventional": "7.5.0",
     "@commitlint/travis-cli": "7.5.0",
