@@ -961,26 +961,26 @@
   dependencies:
     defer-to-connect "^1.0.1"
 
-"@types/chai-as-promised@^7.1.0":
+"@types/chai-as-promised@7.1.0":
   version "7.1.0"
   resolved "https://registry.yarnpkg.com/@types/chai-as-promised/-/chai-as-promised-7.1.0.tgz#010b04cde78eacfb6e72bfddb3e58fe23c2e78b9"
   integrity sha512-MFiW54UOSt+f2bRw8J7LgQeIvE/9b4oGvwU7XW30S9QGAiHGnU/fmiOprsyMkdmH2rl8xSPc0/yrQw8juXU6bQ==
   dependencies:
     "@types/chai" "*"
 
-"@types/chai@*", "@types/chai@^4.0.10":
+"@types/chai@*", "@types/chai@4.1.7":
   version "4.1.7"
   resolved "https://registry.yarnpkg.com/@types/chai/-/chai-4.1.7.tgz#1b8e33b61a8c09cbe1f85133071baa0dbf9fa71a"
   integrity sha512-2Y8uPt0/jwjhQ6EiluT0XCri1Dbplr0ZxfFXUz+ye13gaqE8u5gL5ppao1JrUYr9cIip5S6MvQzBS7Kke7U9VA==
 
-"@types/lodash.assign@^4.2.3":
+"@types/lodash.assign@4.2.4":
   version "4.2.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.assign/-/lodash.assign-4.2.4.tgz#b9fb0e96450c807ad156812620d0721114f36f42"
   integrity sha512-vQZhkRxzcp8WfOCN5ss/MJRnReJlyS5bRL7eChoUp38edH04UefqSXwSa873SUwbF87USU4J5iCZi+oc1Jhu2A==
   dependencies:
     "@types/lodash" "*"
 
-"@types/lodash.difference@^4.5.3":
+"@types/lodash.difference@4.5.4":
   version "4.5.4"
   resolved "https://registry.yarnpkg.com/@types/lodash.difference/-/lodash.difference-4.5.4.tgz#2bb713df01f205f6e3cccf0bf98828531dbecdbb"
   integrity sha512-XQM39m/inPFC1FRDmG1ECDl+veoUeTI4+q7tcXvhtp008Y2XrdAtAuS58qCnmcpsP9txJgo4eOYVl1rv8rpncw==
@@ -992,7 +992,7 @@
   resolved "https://registry.yarnpkg.com/@types/lodash/-/lodash-4.14.119.tgz#be847e5f4bc3e35e46d041c394ead8b603ad8b39"
   integrity sha512-Z3TNyBL8Vd/M9D9Ms2S3LmFq2sSMzahodD6rCS9V2N44HUMINb75jNkSuwAx7eo2ufqTdfOdtGQpNbieUjPQmw==
 
-"@types/mocha@^2.2.45":
+"@types/mocha@2.2.48":
   version "2.2.48"
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-2.2.48.tgz#3523b126a0b049482e1c3c11877460f76622ffab"
   integrity sha512-nlK/iyETgafGli8Zh9zJVCTicvU3iajSkRwOh3Hhiva598CMqNJ4NcVCGMTGKpGpTYj/9R8RLzS9NAykSSCqGw==
@@ -1002,12 +1002,12 @@
   resolved "https://registry.yarnpkg.com/@types/mocha/-/mocha-5.2.5.tgz#8a4accfc403c124a0bafe8a9fc61a05ec1032073"
   integrity sha512-lAVp+Kj54ui/vLUFxsJTMtWvZraZxum3w3Nwkble2dNuV5VnPA+Mi2oGX9XYJAaIvZi3tn3cbjS/qcJXRb6Bww==
 
-"@types/node@^9.3.0":
+"@types/node@9.6.40":
   version "9.6.40"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-9.6.40.tgz#2d69cefbc090cb0bb824542a4c575b14dde7d3aa"
   integrity sha512-M3HHoXXndsho/sTbQML2BJr7/uwNhMg8P0D4lb+UsM65JQZx268faiz9hKpY4FpocWqpwlLwa8vevw8hLtKjOw==
 
-"@types/semver@^5.4.0":
+"@types/semver@5.5.0":
   version "5.5.0"
   resolved "https://registry.yarnpkg.com/@types/semver/-/semver-5.5.0.tgz#146c2a29ee7d3bae4bf2fcb274636e264c813c45"
   integrity sha512-41qEJgBH/TWgo5NFSvBCJ1qkoi3Q6ONSF2avrHq1LVEZfYpdHmj0y9SuTK+u9ZhG1sYQKBL1AWXKyLWP4RaUoQ==
